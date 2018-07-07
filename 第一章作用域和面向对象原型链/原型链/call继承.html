@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //call继承:把父类的私有属性和方法克隆一份一模一样的作为子类私有的属性
+    function A() {
+        this.x=100;
+    }
+    A.prototype.getX=function () {
+        console.log(this.x);
+    }
+    function B() {
+        //通过改变this的指向
+        //this->n
+        //call继承
+        A.call(this);//把A执行 然后把A中的this变成B这个类的实例,这样这个实例n就可以执行A中的方法
+        //执行A方法,让A中的方法this变成n
+    }
+    var n=new B;
+
+</script>
+</body>
+</html>

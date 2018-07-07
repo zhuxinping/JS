@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="div">1234
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+    <p>4</p>
+    <p>5</p>
+</div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    // var $div=$('#div');//$()  html()  moueover()
+    // console.log($div);
+    // console.log($div[0]);
+    // var $p=$('p:first');
+    // var $p1=$('p:last');
+    // var $p2=$('p:eq(3)');
+    // console.log($p.html());
+    // console.log($p1.html());
+    // console.log($p2.html());
+    // var $ap=$('p:lt(3)');
+    // console.log($ap.css('background','red'));
+    // var $p=$('p').first();
+    // console.log($p.css('background','red'));
+    //var $p2=$('p').eq(2);
+    //  var $p3=$('p');
+    // // $p2.html('快吃饭');
+    // // $p2.css({
+    // //     height:40,
+    // //     background:'green'
+    // // }).html('你好吗');//只有实例才能够链式操作
+    // // for(var i=0;i<$p3.length;i++){
+    // //     //$p3[i].style.background='red';
+    // //     $p3.get(i).style.background='#f90';
+    // // }
+    // $p3.css({
+    //     background:'green'
+    // });
+    // $p3.eq(0).style.background='#f90';//错误 不能混淆
+    var oP=document.getElementsByTagName('p')[0];
+    $(oP).css('background','orange');
+</script>
+</body>
+</html>

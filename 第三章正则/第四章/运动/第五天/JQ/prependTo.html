@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>我是p元素</p> <div><span>我是div</span></div>
+<input type="text" value="123456">
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+//$('p').prependTo($('div')).css('background','red');
+// $('div').prepend($('p')).css('background','red');//后续操作不一样
+    //console.log($('input').val());//val获取表单元素的value值
+    $.ajax({
+        type:'get',
+        url:'json/banner.json',
+        async:true,
+        dataType:'json',
+        success:function (res) {
+            console.log(res);
+        },
+        error:function (err) {
+            console.log(err);
+        }
+    });
+</script>
+</body>
+</html>

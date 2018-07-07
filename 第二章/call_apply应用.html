@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>求数组最值</title>
+</head>
+<body>
+<script>
+    var ary=[23,34,24,12,35,36,14,25];
+  //   //1.->排序 从小到大排序 取头尾
+  //   ary.sort(function (a,b) {
+  //       return a-b;
+  //   });
+  // var min=ary[0];
+  //  var max=ary[ary.length-1];
+  //  console.log(min,max);
+
+   //2.->Math函数  在执行的时候把需要比较的数一个个传递进来
+  //   var min=Math.min.apply(null,ary);
+  //   var max=Math.max.apply(null,ary);
+  // console.log(min,max);
+    //eval:把一个js字符串变为js表达式执行例如eval("1+2+3")->6
+    //eval("1,2,3,4,5")->结果是最后一个值5
+    //eval("1,2,3,4")->结果是最后一个值4
+   //" Math.max(\"+ary.toString()+\")"//->" Math.max(23,34,24,12,35,36,14,25)"
+    var max=eval(" Math.max("+ary.toString()+")");//先字符串拼接我们想要的然后eval执行
+    var min=eval(" Math.min("+ary.toString()+")");
+    console.log(max,min);
+  //3.假设法:假设当前数组第一个值是最大值,然后拿这个值和后面项逐一进行比较如果后面的某一个值比假设大，说假设错了，把假设的值进行替换
+   //和自定义属性一样都是JS中最常用的编程思想
+   //  var max=ary[0],min=ary[0];
+   //  for(var i =0;i<ary.length;i++){
+   //      var cur=ary[i];
+   //      cur>max?max=cur:null;
+   //      cur<min?min=cur:null;
+   //  }
+   //  console.log(max,min);
+
+    //->6.括号表达式:
+    // function fn1() {
+    //     console.log(this);
+    // }
+    // function fn2() {
+    //     console.log(this);
+    // }
+    // var obj={name:"zhuxp",fn:fn2};
+    // //(fn2,obj.fn)();//执行的时候里面的this是window而不是obj  因为括号表达式相当于把函数拷贝一份放入进来执行 的时候还指向window
+    // (obj.fn)();//this->obj; 只有一项的时候this-》obj;
+
+    // ;(fn1,fn2)();//->结果是2只有fn2执行  一个括号表达式出现多项内容中间用逗号隔开 我们最后获取的结果只有最后一项
+
+</script>
+</body>
+</html>

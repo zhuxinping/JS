@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var ary=[12,23,14,23,34,1,16,26,2];
+  //  ary.sort();//->这样只能处理10以内的数字排序
+    //V8 引擎 sort 函数只给出了两种排序 InsertionSort 和 QuickSort，数量小于10的数组使用 InsertionSort，比10大的数组则使用 QuickSort
+    // ary.sort(function (a,b) {
+    //     console.log(a,b);
+    //     //a->每一次执行匿名函数的时候,找到数组中的当前项
+    //     //a->当前项的后一项
+    //     return a-b;//升序 如果a>b返回的>0,a和b交换位置
+    //     //return b-a;//降序如果b>a返回的>0,a和b交换位置
+    //     //return 的是一个大于零或小于等于的数,大于零让a和b交换一下位置,小于等于零原有位置不动
+    // });
+    //回调函数:把一个方法A当做参数值传递给另外一个函数B，在B执行的过程当中
+    //我们随时根据需求让A方法执行执行几次也可以
+    // function fn(callback) {
+    //     callback();//回调函数
+    // }
+    // fn(function () {});
+    // (function A() {
+    //         var n=0;
+    //         return function(){
+    //             n++
+    //             console.log("执行回调函数"+n);
+    //         }
+    //     }
+    // )();
+    // function B(fn) {
+    //     fn();
+    //     fn();
+    //     fn();
+    //     fn();
+    // }
+    // B(A);//此时外部访问不了自执行函数里面的函数因为行程闭包了
+    // (function A() {
+    //             console.log("执行回调函数");//会输出一次结果"执行回调函数"
+    //     }
+    // )();
+    // function B(fn) {
+    //     fn();
+    //     fn();
+    //     fn();
+    //     fn();
+    // }
+    // B(A);//报错因为自执行函数形成自己私有作用域 全局作用域无法去访问A方法
+    //只需要记住 函数执行就会开辟一个新的私有作用域即可!!!
+    //总结:作用域链
+    var ary=[
+        {name:"zhuxp",age:30},
+        {name:"lixia",age:18},
+        {name:"yixuan",age:1},
+        {name:"chenxu",age:10}
+    ];
+    //给二维数组排序,按照年龄由小到大进行排序
+   ary.sort(function (a,b) {
+
+       return parseInt(a.age)-parseInt(b.age);
+    });
+    console.log(ary);
+   //由age大到小排序
+    ary.sort(function (a,b) {
+
+        return (parseInt(a.age)-parseInt(b.age))*-1;
+    });
+    //name排序
+    ary.sort(function (a,b) {
+
+        return  a.name.localeCompare(b.name);
+    });
+   console.log(ary);
+</script>
+</body>
+</html>

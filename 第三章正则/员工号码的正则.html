@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .err{
+            color:red;
+            display: none;
+        }
+        .err.active{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <input id="in" type="text">
+    <span id="err"  class="err">!</span>
+</div>
+<script>
+    var $=document.querySelectorAll.bind(document);
+    var oIput=$("#in")[0];
+    var oErr=$("#err")[0];
+    oIput.onblur=function () {
+        var value=this.value.replace(/^\s+|\s+$/g,'');
+        var reg=/^(00[1-9]|0[1-9]\d|[1-9]\d\d)$/;
+        if(!value){
+            oErr.className="err active";
+            oErr.innerHTML="输入的工号不能为空!";
+            return;
+        }
+        if(!reg.test(value)){
+            oErr.className="err active";
+            oErr.innerHTML="您输入的工号格式有误,请输入001-999之间的数字!";
+            return true;
+        }else{
+            oErr.className="err";
+            return false;
+        }
+
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //预解释是毫无节操的一种机制
+    //1.预解释的时候不管你的条件是否成立，都要把带var的进行提前声明
+    //window的预解释:var num;->window.num;
+    //"num" in window  判断num是否window对象的一个属性
+    // var obj={name:'zhuxp',age:17};
+    // console.log("name" in obj);//返回结果是true
+    // console.log("eat" in obj);//返回结果是false
+    // if(!("num" in window)){
+    //     var num=12;
+    // }
+    // console.log(num);//undefined
+    //2.预解释的时候只预解释等号左边的，等号右边是值 不参与预解释
+    //匿名函数之函数表达式:把函数定义的部分当做一个值赋值给我们的变量/元素的某一个事件
+    //window下的预解释var fn;
+   // fn();//->只是声明了var fn;没有赋值相当于 undefined();在执行  出错fn  is not a function
+    // var fn=function(){
+    //     console.log("ok");
+    // }
+    // fn();//->ok
+    // function fn() {
+    //     console.log("ok");
+    // }
+    // fn();//->ok
+    //3.自执行函数:定义和执行一起完成了
+    //自执行函数的function在全局作用域下不进行预解释，当代码执行到这个代码位置的时候
+    //定义和执行一起完成了
+   // var fn= (function (num) {console.log(num)})(100);
+   // console.log(fn);
+   //  ~function (num) {}(100);
+   //  +function (num) {}(100);
+   //  -function (num) {}(100);
+   //  !function (num) {}(100);
+    //(function (num) {console.log(num); return num;})(window)
+  // var a=  (function (num) { return num;})(window);
+  // console.log(a);
+    //4.函数体中 return下面的代码虽然不再执行了，但是需要进行预解释
+    //return 后面跟着都是我们返回的值，所以不进行预解释
+    // function fn() {
+    //     //预解释:var num;
+    //     console.log(num);//->undefined
+    //     return function () {
+    //
+    //     };
+    //     //这边不执行
+    //     var num=100;
+    // }
+    // fn();
+    // console.log(fn());
+
+    //5.预解释:var fn; window.fn; fn=xxxfff000  window.fn=xxxfff000;
+    //在JS中如果变量的名字和函数的名字一样，也算冲突
+    //在预解释的时候如果名字已经声明过了 不需要重新声明但是需要重新的赋值
+
+
+    //在预解释的时候如果名字已经声明过了 不需要重新声明但是需要重新的赋值
+    //函数声明定义一起完成所以会重新赋值
+    //window预解释
+    //声明+定义 fn=xxxfff111
+    //声明var fn;(不需要重新声明)
+    //声明+定义 fn=xxxfff222 重新开辟一个空间了(不需要重新声明,但需要赋值)
+    //预解释完成后: fn=xxxfff222
+    fn();//2
+    function fn() {
+        console.log("1");
+    }
+    fn();//2
+    var fn=10;//->fn=10;
+    fn();//fn is not a function  10();
+    function fn() {
+        console.log("2");
+    }
+    fn();//因为上面报错所以没执行
+</script>
+</body>
+</html>

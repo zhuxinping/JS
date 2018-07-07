@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        ul{
+            width: 480px;
+            height: 640px;
+            margin: 30px auto;
+            background: #ccc;
+            padding: 5px;
+            position: relative;
+        }
+        ul li{
+            width: 150px;
+            height: 150px;
+            float: left;
+            margin: 5px;
+            background: #00CCFF;
+        }
+        ul li img{
+            width: 100%;
+           display: block;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li><img src="img/1.png" alt=""></li>
+    <li><img src="img/2.png" alt=""></li>
+    <li><img src="img/3.png" alt=""></li>
+    <li><img src="img/4.png" alt=""></li>
+    <li><img src="img/5.png" alt=""></li>
+    <li><img src="img/6.png" alt=""></li>
+    <li><img src="img/7.png" alt=""></li>
+    <li><img src="img/8.png" alt=""></li>
+    <li><img src="img/9.png" alt=""></li>
+    <li><img src="img/10.png" alt=""></li>
+    <li><img src="img/11.png" alt=""></li>
+    <li><img src="img/12.png" alt=""></li>
+</ul>
+<script src="js/event.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/move.js"></script>
+<script src="js/Drag2.js"></script>
+
+
+<script>
+    var aLi=document.getElementsByTagName('li');
+    var zIndex=0;
+    var oldColor=null;
+    //1.浮动布局转定位布局
+    for(var i=aLi.length-1;i>=0;i--){
+        var oLi=aLi[i];
+        oldColor=utils.css(oLi,'backgroundColor');
+        oLi.style.left=(oLi.l=oLi.offsetLeft)+'px';
+        oLi.style.top=(oLi.t=oLi.offsetTop)+'px';
+        oLi.style.position='absolute';
+        oLi.style.margin=0;
+        new Drag(oLi).on('selfDown',creaseIndex).on('selfMove',hited).on('selfUp',changePos);
+    }
+    function creaseIndex() {
+        this.ele.style.zIndex=++zIndex;
+        //console.log(this.ele);//this是一个实例
+    }
+    function goHome(){//手松开的时候让元素返回初始的位置
+        animate({
+        id:this.ele,
+        target:{
+            left:this.ele.l,
+            top:this.ele.t
+        }
+    });
+    }
+//判断任意两个元素是否相撞
+    function isHited(l,r){
+        if(l.offsetLeft+l.offsetWidth<r.offsetLeft ||l.offsetTop+l.offsetHeight<r.offsetTop||l.offsetLeft>r.offsetLeft+r.offsetWidth||l.offsetTop>r.offsetTop+r.offsetHeight){
+            return false;//没碰到
+        }else{
+            return true;//碰到了
+        }
+    }
+    //hited:找到当前元素碰到的所有元素
+    function hited() {
+        this.ary=[];
+        for(var i=0;i<aLi.length;i++){
+            var oLi=aLi[i];
+            //如果遇到自己 直接跳过
+            if(this.ele===oLi) continue;
+            if(isHited(this.ele,oLi)){
+                this.ary.push(oLi);
+                oLi.style.background='red';
+            }else{
+                oLi.style.background=oldColor;
+            }
+        }
+    }
+    //changePos:从碰到的所有元素中,找到距离当前元素最短的元素交换位置
+function changePos() {
+    var ary=this.ary;//[li,li]
+        if(ary&&ary.length){
+            for(var i=0;i<ary.length;i++){
+                var oLi=ary[i];
+                oLi.dis=Math.pow(this.ele.offsetLeft-oLi.offsetLeft,2)+Math.pow(this.ele.offsetTop-oLi.offsetTop,2);
+                oLi.style.background=oldColor;
+            }
+            ary.sort(function (a,b) {
+                return a.dis-b.dis;//从小到大排序
+            });
+            var shorttest=ary[0];
+            this.ele.style.background='purple';
+            shorttest.style.background='purple';
+            animate({
+                id:this.ele,
+                target:{
+                    left:shorttest.l,
+                    top:shorttest.t
+                }
+            });
+            animate({
+                id:shorttest,
+                target:{
+                    left:this.ele.l,
+                    top:this.ele.t
+                }
+            });
+            //把交换的元素身上的位置进行更新
+            var l=this.ele.l,t=this.ele.t;
+            this.ele.l=shorttest.l,this.ele.t=shorttest.t;
+            shorttest.l=l,shorttest.t=t;
+        }else{//说明没碰到任何元素
+            animate({
+                id:this.ele,
+                target:{
+                    left:this.ele.l,
+                    top:this.ele.t
+                }
+            });
+        }
+        }
+</script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+<div id="div"></div>
+<script>
+    var oDiv=document.getElementById('div');
+        oDiv.onmousedown=down;
+    function down(e) {
+        e=e||window.event;
+        //物体本身的距离:left  top鼠标落脚点pageX  pageY
+        //把left  top保存到自定义属性里面
+        this.left=this.offsetLeft;
+        this.top=this.offsetTop;
+        this.x=e.pageX;
+        this.y=e.pageY;
+        this.onmousemove=move;
+        this.onmouseup=up;
+    }
+
+    function move(e) {
+        e=e||window.event;
+            //left+e.pageX-之前的e.pageX;
+        this.style.left=this.left+e.pageX-this.x+'px';
+        this.style.top=this.top+e.pageY-this.y+'px';
+    }
+
+    function up() {
+        this.onmousemove=null;
+        this.onmouseup=null;
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            padding: 100px;
+            margin: 60px;
+            background: red;
+            border: 50px solid #000000;
+        }
+    </style>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+    var $=document.querySelectorAll.bind(document);
+    window.onload=function () {
+        var oDiv=$("#div1")[0];
+        console.dir(oDiv);
+    }
+
+</script>
+</body>
+</html>

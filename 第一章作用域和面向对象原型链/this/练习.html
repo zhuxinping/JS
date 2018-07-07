@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //自执行函数里面的this总是window
+    var num=20;
+    var obj={
+        num:30,
+        fn:(function (num) {
+            this.num*=3;//->window.num*=3-->60  这样window.num=60;
+            num+=15;//->私有变量形参num加15变成 35
+            var num=45;//形参num有了不需要再声明var num私有变量 这里还是私有变量形参还是变成45
+            return function () {
+                this.num*=4;
+                num+=20;
+                console.log(num);//如果要传入obj中的num需要通过obj.num指向才可以
+            }
+        })(num)//obj.num   这里的num是全局的var num=20  不是obj下的30，如果想是obj下的30，需要写obj.num
+    };
+    //obj这个对象是一个堆空间而已不是作用域,所以传入的参数是一个全局的var num=20;
+    var fn=obj.fn;
+    fn();//执行主体前面没有点window//65
+    obj.fn();//85
+    console.log(window.num,obj.num);//240,120
+    //在全局作用域下自执行函数不进行预解释
+    // ~function () {
+    //    //私有作用域
+    // }()
+
+
+    //这种题目要根据作用域链和预解释来画图进行分析
+</script>
+</body>
+</html>

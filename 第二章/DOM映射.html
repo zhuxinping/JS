@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM映射机制</title>
+</head>
+<body>
+<ul id="ul1">
+    <li>12</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>2</li>
+</ul>
+<script src="js/utils.js"></script>
+<script>
+    var $ = document.querySelectorAll.bind(document);
+    //先把元素集合类数组转化为数组
+    window.onload=function () {
+        //console.log($);
+        var oUl=$("#ul1")[0];
+        var oLis=oUl.children;
+        console.log(oLis.length);//->5
+        var oLi=document.createElement("li");
+        oUl.appendChild(oLi);
+        console.log(oLis.length);//->6虽然没有重新获取元素集合但是oLis的长度和内容会自动跟着改变
+        //DOM映射机制:页面中标签和JS中获取到的元素对象是紧紧绑定在一起的
+        //页面中的HTML结构改变了，JS中不需要重新获取，集合里面的内容也会跟着自动改变
+    }
+</script>
+</body>
+</html>

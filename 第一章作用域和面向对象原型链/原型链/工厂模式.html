@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+// var jsPerson1={
+//     name:"zhuxp",
+//     age:30,
+//     writeJs:function () {
+//         console.log("my name is "+this.name+" i can write js！");
+//     }
+// }
+// jsPerson1.writeJs();
+// var jsPerson2={
+//     name:"lixia",
+//     age:18,
+//     writeJs:function () {
+//         console.log("my name is "+this.name+" i can write js！");
+//     }
+// }
+// jsPerson2.writeJs();
+//单例模式虽然解决了分组的作用，但是不能实现批量的生产,属于手工作业模式
+
+    //工厂模式
+//把实现同一件事情的相同代码放到一个函数中,以后如果要实现这个功能不需要重新编写这些代码，只需要执行当前的函数即可!
+//-->"函数的封装"---低耦合 高内聚    减少页面中的冗余代码 提高代码的重复利用率
+//     function createJsPerson(name,age) {
+//         //name age私有变量
+//         var obj={};
+//         //私有属性
+//         obj.name=name;
+//         obj.age=age;
+//        obj. writeJs=function () {
+//         console.log("my name is "+this.name+" i can write js！");
+//      }
+//      return obj;
+//     }
+// var p1=createJsPerson("zhuxp",18);
+//     p1.writeJs();
+// var p2=createJsPerson("lixia",18);
+// p2.writeJs();
+//JS是一门轻量级的脚本语言
+//html+css不属于编程语言 属于标记语言
+//.net C PHP JAVA C++ VB VF python object-c Go
+//所有的编程语言是面向对象开发的 类的继承 封装 多态
+    //继承:子类继承父类的属性和方法
+    //多态:当前的方法多种形态
+    //后台语言:多态包含重载和重写
+// function sum(num1,num2) {
+//
+// }
+// function sum(num1) {
+//
+// }
+//后面的函数会覆盖前面的
+    //JS不存在重载,方法名一样的话，后面会把前面的覆盖掉，最后只保留一个
+//JS有一个操作类似重载但不是重载:我们可以根据传递的参数的不同实现不同的功能
+    //JS重写:子类重写父类的方法
+//     function sum(num) {
+//         if(typeof num==="undefined"){
+//             return 0;
+//         }
+//         return num;
+//     }
+// console.log(sum(100));
+// console.log(sum());
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //[]
+    //在[]中出现的所有字符都是代表本身意思的字符无特殊含义
+    //[]中括号中不识别两位数
+    //var reg=/^[12]$/;//1或者2中的一个
+   // var reg=/^[12-68]$/;//1，2-6中的一个 8  三个中一个  1  2-6  8三部分
+   // var reg=/^[\w-]$/;//数字字母下划线-中的一个
+    //console.log(reg.test("-"));
+    // var reg=/^[.]$/;//
+    // console.log(reg.test("1"));//false
+    // console.log(reg.test("."));//true
+    //1.有效数字的正则:正数负数零小数
+    //"."可以出现小数点也可以不出现但是一旦出现小数点后面必须有数字
+    //最开始可能有+、-也可以没有
+    //整数部分 一位数可以是0-9，多位数不能以0开头
+    // /^18|19$/优先级很混乱 18 181 1819都可以分组 /^(18|19)$/
+    // var reg=/^[+-]?(\d|([1-9]\d+))(\.\d+)?$/;
+    // console.log(reg.test("09"));
+   // var reg=/^(\d|([1-9]\d+))$/;
+    //12.3
+    //12
+    //-12
+    //+12
+    //0.2
+    //09
+    //2.年龄介于18-65之间
+    // 18-19   20-59  60-65  //后面那尾数要出现0-9这样的特征
+//     var reg=/^(1[8-9]|[2-5]\d|6[0-5])$/
+// console.log(reg.test("18"));//true
+// console.log(reg.test("38"));//true
+// console.log(reg.test("66"));//false
+    //员工号码介于001-999
+    // 001-009   010-099  100-999
+    // var reg=/^(00[1-9]|0[1-9]\d|[1-9]\d\d)$/;
+    // console.log(reg.test("001"));
+    // console.log(reg.test("009"));
+    // console.log(reg.test("010"));
+    // console.log(reg.test("019"));
+    // console.log(reg.test("019"));
+    // console.log(reg.test("029"));
+    // console.log(reg.test("099"));
+    // console.log(reg.test("100"));
+    // console.log(reg.test("199"));
+    // console.log(reg.test("299"));
+    // console.log(reg.test("999"));
+    //验证邮箱的正则:
+    //左边:数字 字符下划线
+    //1144709265@qq.com
+    //
+    // var reg=/^[\w.-]+@[0-9a-zA-Z]+(\.[a-zA-Z]{2,4}){1,2}$/
+    //4.中国标准真是姓名 2-4汉字
+   // var reg=/^[\u4e00-\u9fa5]{2,4}$/;
+    //身份证号码:
+    //var reg=/^\d{17}(\d|X)$/;//正则捕获
+    var reg=/^(\d{2})(\d{4})(\d{4})(\d{2})(\d{2})(\d)(\d|X)$/;
+
+</script>
+</body>
+</html>

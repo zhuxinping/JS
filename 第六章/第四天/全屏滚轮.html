@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #main{
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        .main .boxInner{
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        .main .boxInner div{
+            width: 100%;
+            font-size: 100%;
+        }
+        .div1{
+            background: dodgerblue;
+        }
+        .div2{
+            background: darkcyan;
+        }
+        .div3{
+            background: darkgoldenrod;
+        }
+        .div4{
+            background: darkgreen;
+        }
+        .div5{
+            background: darkolivegreen;
+        }
+        .div6{
+            background: darkorange;
+        }
+        .nav{
+            position: fixed;
+            top: 50%;
+            margin-top: -180px;
+            right: 20px;
+        }
+        .nav li{
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: grey;
+            margin: 10px;
+        }
+        .nav li.on{
+            background: pink;
+        }
+    </style>
+</head>
+<body>
+<div id="main" class="main">
+    <div class="boxInner">
+        <div class="div1">page1</div>
+        <div class="div2">page2</div>
+        <div class="div3">page3</div>
+        <div class="div4">page4</div>
+        <div class="div5">page5</div>
+        <div class="div6">page6</div>
+    </div>
+</div>
+<ul id="nav" class="nav">
+    <li class="on">1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+    <li>6</li>
+</ul>
+<script src="js/utils.js"></script>
+<script src="js/wheel.js"></script>
+<script src="js/move.js"></script>
+<script>
+    var oMain=document.getElementById('main');
+    var oNav=document.getElementById('nav');
+    var oBoxInner=oMain.getElementsByTagName('div')[0];
+    var aDiv=oBoxInner.getElementsByTagName('div');
+    var aLi=document.getElementsByTagName('li');
+    var n=0;
+    var isWheel=true;
+    var timer=null;
+    oMain.style.height=utils.win('clientHeight')+'px';
+    //1.让每个div的高度都等于整屏的高度
+    for(var i=0;i<aDiv.length;i++){
+        aDiv[i].style.height=utils.win('clientHeight')+'px';
+    }
+    for(var i=0;i<aLi.length;i++){
+        aLi[i].index=i;
+    }
+    //2.添加滚轮事件,拿到数字,把数字作为索引的模块
+    wheel(oMain,function (bOK) {
+        if(bOK){
+           if(isWheel){
+               n++;
+               if(n>=aDiv.length){
+                   n=aDiv.length-1;
+                   return;
+               }
+               restore();
+              // utils.css(oBoxInner,'top',-n*utils.win('clientHeight'));
+               changePage();
+           }
+        }else{
+            if(isWheel){
+                n--;
+                if(n<=-1){
+                    n=0;
+                    return;
+                }
+                restore();
+                changePage();
+            }
+        }
+        // console.log(n);
+    });
+    function restore() {
+        isWheel=false;
+        clearTimeout(timer);
+        timer=setTimeout(function () {
+            isWheel=true;
+        },600);
+    }
+    function changePage() {
+        //滚动页面
+        animate({
+            id:oBoxInner,
+            target:{
+                top:-n*utils.win('clientHeight')
+            },
+            effect:4
+        });
+        //按钮切换
+        for(var i=0;i<aLi.length;i++){
+            aLi[i].className=i==n?'on':null;
+        }
+    }
+
+    //点击页面切换
+    oNav.onclick=function (e) {
+        e=e||window.event;
+        var target=e.target||e.srcElement;
+        if(target.tagName.toLocaleLowerCase()==='li'){
+           //console.log(target.index);
+            n=target.index;
+            changePage();
+        }
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script src="js/on.js"></script>
+<script>
+    // 水壶类 类的实例可以调用on，通过原型继承的方式，让水壶类的实例通过原型链可以找到on 方法；
+    function Kettle() {
+
+    }
+    Kettle.prototype = new EventFire();//Kettle让它的原型指向一个实例new EventFire()  这样Kettle的实例和原型都可以调用EventFire原型上的公有方法
+    var k1 =new Kettle();
+    function fn1() {
+        console.log("洗个开水澡")
+    }
+    function paomian() {
+        console.log("可以泡面了")
+    }
+    k1.on("boiling",fn1)
+    k1.on("boiling",paomian)
+   // k1.off("boiling",fn1)
+    setTimeout(function () {
+        k1.fire("boiling")
+    },3000)
+</script>
+</html>

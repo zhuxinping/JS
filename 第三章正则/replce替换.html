@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //repalce//把原有的字符替换成新的字符
+    //在不实用正则的情况下 每当执行一次只能替换一个字符
+    //  var str="zhu2015zhu2016";
+    // // str=str.replace("zhu","zhuxp");
+    // // str=str.replace(/zhu/g,"zhuxp");
+    //  //replace第一项的值是一个正则它的实现原理
+    //  //console.log(str);
+    //  //首先我们和exec捕获一样 把所有和我们正则匹配的都捕获到然后把捕获的都替换成我们要替换的新内容
+    // // /zhu/g  按照这个正则把str中所有可以匹配的都捕获到，然后统一都替换成我们的"zhuxp"
+    // console.log(/zhu/g.exec(str));//["zhu", index: 0, input: "zhu2015zhu2016", groups: undefined]
+    // str=str.replace(/zhu/g,function () {
+    //    // console.log("ok");
+    //     console.log(arguments);
+    //     //第一次匿名函数的结果["zhu", index: 0, input: "zhu2015zhu2016", groups: undefined]
+    //     //第二次匿名函数的结果 ["zhu", 7, "zhu2015zhu2016", callee: ƒ, Symbol(Symbol.iterator): ƒ]
+    //    return "zhuxp"
+    // });
+    // console.log(str);//捕获几次回调就执行几次
+    //第二个参数换成一个函数
+    //1)匿名函数执行多少次,取决于正则能在字符串捕获多少次
+    //2)每一次执行匿名函数里面的传递参数值arguments和我们自己通过exec捕获到的结果是非常相似的
+    //即使正则有分组，我们同样可以通过arguments获取到分组捕获的内容
+// 3)return 意思是返回的结果是啥 替换的内容就是啥相当于把当前这一次的大正则捕获的内容替换成返回的内容
+//     str=str.replace(/(zhu|\d)/g,function () {
+//         // console.log("ok");
+//         console.log(arguments);
+//         //第一次匿名函数的结果["zhu", index: 0, input: "zhu2015zhu2016", groups: undefined]
+//         //第二次匿名函数的结果 ["zhu", 7, "zhu2015zhu2016", callee: ƒ, Symbol(Symbol.iterator): ƒ]
+//         return "zhuxp"
+//     });
+//     console.log(str);
+//     var str="zhu2015zhu2016";
+// str=str.replace(/\d+/g,function () {
+//    console.log(arguments[0]);//每一次执行匿名函数把大正则捕获的内容获取到
+//    return 1;//我返回1把每一次大正则匹配捕获的内容都替换成1
+// });
+// console.log(str);//zhu1zhu1
+    var str="zhu2015zhu2016";
+    var reg=/(\d+)/g;
+    str=str.replace(reg,function () {
+      console.log(arguments[1]);//每一次执行匿名函数我们正则捕获的第一个分组中的内容
+      // console.log(RegExp.$1);//每一次执行匿名函数我们正则捕获的第一个分组中的内容
+        //Arguments(4) ["2015", "2015", 3, "zhu2015zhu2016", callee: ƒ, Symbol(Symbol.iterator): ƒ]
+       //Arguments(4) ["2016", "2016", 10, "zhu2015zhu2016", callee: ƒ, Symbol(Symbol.iterator): ƒ]
+        //return 1;//我返回1把每一次大正则匹配捕获的内容都替换成1
+    });
+    //RegExp.$1获取第一个分组捕获的内容
+    console.log(str);
+
+</script>
+</body>
+</html>

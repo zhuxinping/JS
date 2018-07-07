@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    const initArray=(m,n)=>{
+        var ary=[]
+        if(typeof m ==="undefined"){
+            return [];
+        }
+        if(typeof n==="undefined"){
+            return [];
+        }
+        if(m==0){
+            return [];
+        }
+        if((m<0)){
+            throw new Error("你输入的不是数组!");
+        }
+        function pushCur(m,n) {
+             m--;
+             ary.push(n);
+            if(m==0){
+                return ;
+            }
+            pushCur(m,n);
+        }
+        pushCur(m,n);
+        return ary;
+    }
+    // const initArray=(m,n)=>{
+    //     if(!m){
+    //         return false;
+    //     }else{
+    //         m=Number(m);
+    //     }
+    //     let arr=new  Array(m);
+    //         arr.fill(n);
+    //         return arr;
+    // }
+    // console.log(initArray())
+    // console.log(initArray(0))
+    // console.log(initArray(undefined,0))
+    // console.log(initArray(1,1))
+    console.log(initArray(200,99))
+    //console.log(initArray(-20,1))
+   console.log(initArray(20,-1))
+   console.log(initArray(-1,0))
+</script>
+</body>
+</html>

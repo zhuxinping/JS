@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas{
+            border: 1px solid #000;
+        }
+        input{
+            width: 100px;
+            height: 40px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="开始" id="start">
+<input type="button" value="暂停" id="pause"><br>
+<canvas width="800" height="500" id="canvas"></canvas>
+<script>
+    var start=document.getElementById('start');//id获取元素
+    var pause=document.getElementById('pause');//id获取元素
+    var canvas=document.getElementById('canvas');//id获取元素
+    //上下文 创建一个2D环境 以后所有的操作都依赖ctx这个对象
+    var ctx=canvas.getContext('2d');
+    //创建一个女孩类
+    function Girl(x,y) {
+            this.x=x||50;
+            this.y=y||50;
+            this.state=0;
+    }
+    Girl.prototype={
+        constructor:Girl,
+        update:function () {//更新状态
+            this.state=++this.state%4;
+            this.x+=6;
+        },
+        render:function () {//渲染
+            ctx.drawImage(game.img,this.state*80,98*2,80,98,this.x,this.y,80,98);
+        }
+    }
+    //游戏组件
+    function Game() {//当Game创建一个实例时 首先开始加载图片
+        var _this=this;
+        this.img=new Image();
+        this.img.src='img/1.png';
+        this.timer=null;
+        this.img.onload=function () {//等图片加载完成,让游戏跑起来
+            _this.run();
+        }
+        this.girl=new Girl();//创建一个女孩的类---创建一个角色
+
+    }
+    Game.prototype={
+        constructor:Game,
+        mainloop:function(){//游戏主程序
+            //先清空画布,再更新,再渲染
+              ctx.clearRect(0,0,canvas.width,canvas.height);
+              this.girl.update();
+              this.girl.render();
+        },
+        run:function () {//开始游戏在run中调用主程序
+           // this.mainloop();
+            var _this=this;
+            clearInterval(this.timer);
+            this.timer=setInterval(function () {
+                _this.mainloop();
+            },100);//1s 走10帧
+        },
+        pause:function () {
+            clearInterval(this.timer);
+        }
+    }
+    
+    var game=new Game();
+    start.onclick=function () {
+        game.run();
+    }
+    pause.onclick=function () {
+        game.pause();
+    }
+</script>
+</body>
+</html>

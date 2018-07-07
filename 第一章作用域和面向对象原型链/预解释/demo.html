@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // if(!("num" in window)){
+    //      num=12;
+    // }
+    // console.log(num);
+    if(("num" in window)){
+        num=12;
+    }
+    console.log(num);
+    //自执行函数
+   // 函数表达式加括号可以立即执行该函数，函数声明不可以
+
+    function fnName(){
+        alert(123)
+    }() // 报错
+
+    var fnName = function () {
+        alert(123)
+    }() // 正常执行
+
+    //要想立即执行，函数必须是函数表达式，不能使函数声明，而在function前面加上！、()、+、-、=等运算符，都可以将函数声明转换成为函数表达式，告诉JS引擎这是一个函数表达式，不是函数声明，所以可以在后面加括号，并且立即执行函数
+
+    (function (a) {
+        alert(a)
+    })(123)
+
+    // 另一种写法
+    (function (a) {
+        alert(a)
+    }(123))
+
+    //这样写法的作用
+    //用这种写法可以模仿一个私有作用域，用匿名函数作为一个容器，容器内部可以访问外部变量，外部环境不能访问容器内部变量
+
+    //所以( function(){…} )()内部定义的变量不会和外部的变量发生冲突，俗称“匿名包裹器”或“命名空间”。
+
+var test = 100;
+    (function (a) {
+        var x = a + 100;
+        alert(x)
+    }(123));
+
+    console.log(x)//undefined
+
+    //JQuery使用的就是这种方法，将JQuery代码包裹在( function (window,undefined){…jquery代码…} (window)中，在全局作用域中调用JQuery代码时，可以达到保护JQuery内部变量的作用。
+</script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    /**
+     * 1. 回调函数被调用4次  调用的次数取决于数组的长度
+     * 2. 回调函数中,被传的实参有3个,所以最多可以接受3个形参:1)item:内容 2)index:索引 3)input:原始数组
+     * 3. 回调函数中this默认是window,回调函数中的this可以被forEach的第二个参数改变;如果第二个没传默认是window
+     * 4. 回调函数没有返回值,forEach也没有返回值
+     *
+     * */
+    var obj={};
+    var ary=[10,40,60,20];
+
+    // let res= ary.forEach(function (){
+    //     console.log(arguments);
+    // },obj);
+    // console.log(res);//->undefined 说明forEach没返回值是undefined
+    Array.prototype.myForEach=function (callback,context) {
+        //this->ary
+        //console.log(this);
+        context=context||window;
+        if('forEach' in Array.prototype){//标准浏览器
+            this.forEach(callback,context);//传参第一是回调函数 第二个是context
+            return;//阻断程序的执行;
+        }
+        //IE浏览器兼容处理
+        for(var i=0;i<this.length;i++){
+            callback.call(context,this[i],i,this);//第一个参数是改变this指向后面是三个参数1)item:内容 2)index:索引 3)input:原始数组
+        }
+    };
+ary.myForEach(function (item,index,input) {
+   console.log(item);
+},obj);
+</script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+</body>
+<script>
+    //柯里化函数:本质就是预处理机制;原理:返回一个函数定义阶段，然后在定义阶段更改参数以及this指向,当满足条件在执行这个函数
+    //封装bind函数
+    //1.bind应该在哪里封装?  Function.prototype.MyBind
+    //2.bind有几个参数？
+    //-context改变this指向
+    //3.bind有返回值嘛?返回值是什么  返回值是已经修改过的this，并且传过参数的函数的定义阶段
+    /**
+     *
+     *
+     *
+     * */
+    var obj={};
+    function fn(n,m) {
+        console.log(this,(n+m));
+        // console.log(arguments[0]);
+        // console.log(arguments[1]);
+        console.log(arguments[2]);
+        //arguments[i+1]最后另外一个参数系统传递的事件对象e
+    }
+    Function.prototype.myBind=function(context){
+        //this->实例
+        var _this=this;
+        var outArg=Array.prototype.slice.call(arguments,1);//执行slice方法从1开始截取 slice(1)
+        if('bind' in Function.prototype){//当浏览器支持bind的时候
+           // return this.bind(context,...outArg);
+            return this.bind.apply(this,[context].concat(outArg));
+        }
+        return function () {//匿名函数是一个定义阶段 还没执行  ,返回一个函数的定义阶段
+            var innerArg=Array.prototype.slice.call(arguments);
+            innerArg.length===0?innerArg[innerArg.length]=window.event:null;
+            _this.apply(context,outArg.concat(innerArg));
+        }
+    }
+   // document.body.onclick=fn.bind(obj,2,3);
+    document.body.onclick=fn.myBind(obj,2,3);
+</script>
+</html>

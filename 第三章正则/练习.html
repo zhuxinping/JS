@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//    var str= "2015-9-22 13:10:00";//->  "2015年9月22日  13时10分00秒"  时间正则实现分组捕获
+//    var ary=[];
+//    str.replace(/^(\d{4})[-/](\d{1,2})[-/](\d{1,2}) +(\d{1,2}):(\d{1,2}):(\d{1,2})$/g,function () {
+//        ary=[].slice.call(arguments).slice(1,7);
+//       // console.log(ary);
+//        return arguments[0];
+//    });
+//
+//    //设定好目标格式然后把数组中对应的项替换到指定的区域内
+//     var resStr="{0}年{1}月{2}日  {3}时{4}分{5}秒",reg=/{(\d+)}/g;//获取大正则和分组的小正则
+//    resStr=resStr.replace(reg,function () {
+//       //console.log(arguments);
+//        var num=arguments[1],val=ary[num];
+//        val.length===1?val="0"+val:void 0;
+//       return val;
+//
+//    });
+// console.log(resStr);
+String.prototype.myFormatTime = function myFormatTime(template) {
+    //->this:str
+    var ary = this.match(/\d+/g);
+    template = template || '{0}年{1}月{2}日 {3}时{4}分{5}秒';
+    template = template.replace(/\{(\d+)\}/g, function () {
+        var val = ary[arguments[1]] || 0;
+        return val.length < 2 ? '0' + val : val;
+    });
+    return template;
+};
+
+var str = '2017/8/13 00:12:13';
+console.log(str.myFormatTime());
+console.log(str.myFormatTime('{1}-{2} {3}:{4}'));
+console.log(str.myFormatTime('{0}年{1}月{2}日'));
+</script>
+</body>
+</html>

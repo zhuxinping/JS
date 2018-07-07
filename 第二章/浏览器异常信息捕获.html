@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //我们在JS中用try catch捕获浏览器异常信息
+   // console.log(num);//报错num is not defined
+    //console.log("ok");//不执行
+    //1.我们如果用try catch捕获异常信息 不影响下面代码继续执行如果报错了会默认执行catch中的代码
+    // try {
+    //     console.log(num);
+    //
+    // }catch (e) {
+    //     //形参必须要写
+    //     console.log(e.message);//收集代码报错的原因num is not defined
+    //     console.log("报错了");
+    // }
+    // try {
+    //     //js code
+    // }catch (e) {
+    //     //如果代码报错执行catch代码
+    // }finally {
+    //     //一般不用
+    //     //不管try是否报错都要执行finally中的代码
+    //
+    // }
+    //有时候我们既想捕获到错误信息，又想不让下面代码继续执行用  throw new Error();抛出一个错误
+    try {
+        //js code
+        console.log(num)
+    }catch (e) {
+        //如果代码报错执行catch代码
+        //
+        //console.log(e.message);
+        //手动抛出一条错误信息，终止继续执行
+        throw new Error("当前网络繁忙,请稍后再试!");//抛出一个错误的实例出来
+        // new ReferenceError //->引用错误 xxx is not defined
+        // new TyepeError //类型错误 xxx is not function
+        // new RangeError //范围错误
+    }
+    console.log("ok");
+</script>
+</body>
+</html>

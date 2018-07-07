@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // var obj={};
+    // var obj1=new Object();这两种没区别
+    // var num=1;//基本数据类型
+    // var num=new Number();//对象数值类型  这两种有区别
+    // Object.prototype.aaa=function () {
+    //
+    // };
+    var obj={name:'zhuxp',age:28};
+    // for(var key in obj){
+    //  // if(obj.propertyIsEnumerable(key)){
+    //  //     console.log(key);//for in循环在遍历的时候，默认可以把自己私有的和在他所属类原型上扩展的属性和方法都可以遍历到
+    //  //     //但是一般情况下我们遍历一个对象只需要私有的即可,我们可以使用以下的判断进行处理
+    //  // }
+    // }
+    //obj.propertyIsEnumerable  是否可枚举
+    //2.
+    for(var key in obj){
+        if(obj.hasOwnProperty(key)){//判断是否是私有属性
+            console.log(key);//for in循环在遍历的时候，默认可以把自己私有的和在他所属类原型上扩展的属性和方法都可以遍历到
+            //但是一般情况下我们遍历一个对象只需要私有的即可,我们可以使用以下的判断进行处理
+        }
+    }
+</script>
+</body>
+</html>

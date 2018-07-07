@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .err{
+            color:red;
+            display: none;
+        }
+        .err.active{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <input id="in" type="text">
+    <br>
+    <span id="err"  class="err">!</span>
+    <ul id="ul1">
+
+    </ul>
+</div>
+<script>
+    // var reg = /^(\d{2})(\d{4})(\d{4})(\d{2})(\d{2})(?:\d{2})(\d)(?:\d|X)$/;
+    // var str="350521198811038017";
+    var $=document.querySelectorAll.bind(document);
+    window.onload=function () {
+        var oIput=$("#in")[0];
+        var oErr=$("#err")[0];
+        var oUl=$("#ul1")[0];
+        var reg = /^(\d{2})(\d{4})(\d{4})(\d{2})(\d{2})(?:\d{2})(\d)(?:\d|X)$/;
+        var ary=[];
+        oIput.onblur=function () {
+            var value=this.value.trim();
+            //var value=this.value.replace(/^\s+|\s+$/g,'');
+            console.log(value);
+            if(!value){
+                oErr.className="err active";
+                oErr.innerHTML="输入的身份证号不能为空!";
+                return;
+            }
+            if(!reg.test(value)){
+                oErr.className="err active";
+                oErr.innerHTML="您输入的身份证号格式有误,请重新输入!";
+                return true;
+            }else{
+                oErr.className="err";
+                //通过验证
+                ary=reg.exec(value);
+                console.log(ary);
+                console.log(value);
+                bind();
+                return false;
+            }
+
+        }
+        function bind() {
+           if(ary){
+               var json={"year":ary[3],"mouth":ary[4],"date":ary[5],"sex":ary[6]};
+               var frg=document.createDocumentFragment();
+               for(var key in json){
+                   var oLi=document.createElement("li");
+                   if(key==="sex"){
+                       console.log(json[key]);
+                       oLi.innerHTML=json[key]==1?"男":"女";
+                   }else{
+                       oLi.innerHTML=json[key];
+                   }
+                   frg.appendChild(oLi)
+               }
+               oUl.appendChild(frg);
+               frg=null;
+           }
+        }
+
+    }
+</script>
+</body>
+</html>

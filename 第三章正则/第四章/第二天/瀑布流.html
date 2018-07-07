@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>瀑布流</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        div{
+            width:1550px;
+            margin: 10px auto;
+        }
+        div ul{
+            width: 300px;
+            margin: 5px;
+            float: left;
+        }
+        div ul li{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<div>
+    <ul></ul>
+    <ul></ul>
+    <ul></ul>
+    <ul></ul>
+    <ul></ul>
+</div>
+<script src="js/utils.js"></script>
+<script>
+    //瀑布流的思想:
+    //布局:如果要五列  那我需要五个ul（浮动）：每个创建的一个li都往最短的(sort)ul里面插入
+    //每加载一次,可能会一次性创建30-50个元素,然后把每个li元素分别往ul最短的插入
+    //封装一个方法:创建一个元素的方法
+    //1.封装创建一个元素的方法;(高度随机,背景色随机)2.批量创建元素，每创建一个就往ul最短的里面插入
+    //2.满足一定条件，再批量创建一批li;再逐个插入;
+    var oUl=document.getElementsByTagName('ul');
+    function createLi() {
+        var oLi=document.createElement('li');
+        oLi.style.height=utils.rnd(80,200)+'px';
+        oLi.style.background='rgb('+utils.rnd(0,255)+','+utils.rnd(0,255)+','+utils.rnd(0,255)+')';
+        return oLi;
+    }
+   // oUl[0].appendChild(createLi());
+    //需求:创建50个li每创建一个li都插入到最短的ul里面去
+    /**
+     * 1.创建50个li
+     * 2. 排序如何实现?高度
+     * 3.插入到最短的ul
+     *
+     * */
+    function Lis() {
+        //1.创建50个li
+        for(var i=0;i<50;i++){
+            var oLi=createLi();
+            //2.每创建一个li都插入到最短的ul里面去
+            //排序三步走:1)类数组转换数组2)sort3)插入到最短的ul里面去
+            var ary=utils.toArray(oUl);
+            ary.sort(function (a,b) {
+                return a.offsetHeight-b.offsetHeight;
+            });
+            ary[0].appendChild(oLi);
+        }
+    }
+    Lis();
+    window.onscroll=function () {
+        var scrollBottom=utils.win('scrollTop')+utils.win('clientHeight');
+       // console.log(scrollBottom,document.documentElement.scrollHeight);
+       //  if((document.body.scrollHeight+500)||(document.documentElement.scrollHeight+500)>=scrollBottom){
+        //      Lis();
+        //  }
+        if(utils.win('scrollHeight')>=scrollBottom){
+            Lis();
+        }
+    }
+</script>
+</body>
+</html>

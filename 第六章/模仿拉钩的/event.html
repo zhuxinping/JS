@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div id="div"></div>
+<script>
+    var oDiv=document.getElementById('div');
+
+    oDiv.onclick=function (e) {
+        e=e||window.event;
+        console.log(e);
+    }
+</script>
+</body>
+</html>

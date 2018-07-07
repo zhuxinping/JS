@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #box{
+            width: 840px;
+            margin: 10px auto;
+            position: relative;
+        }
+        #box img{
+            width: 200px;
+            float: left;
+            display: block;
+            margin: 5px;
+        }
+        #mark{
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+        #mark img{
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <img src="img/apple_1.jpg" realImg="./img/apple_1_bigger.jpg" alt="">
+    <img src="img/apple_2.jpg" realImg="./img/apple_2_bigger.jpg" alt="">
+    <img src="img/apple_3.jpg" realImg="./img/apple_3_bigger.jpg" alt="">
+    <img src="img/apple_4.jpg" realImg="./img/apple_4_bigger.jpg" alt="">
+    <div id="mark">
+        <img src="./img/apple_1_bigger.jpg" alt="">
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+  var $box=$('#box');
+  var $mark=$('#mark');
+  var $pos=$box.offset();
+  $box.mouseover(function (e) {
+     // console.log(e.target);拿到原生的元素
+      $mark.show().find('img').attr('src',e.target.getAttribute('realImg'));
+  });
+  $box.mousemove(function (e) {
+        //鼠标移动的时候计算left top位置
+      $mark.css({
+          left:e.clientX-$pos.left+10,
+          top:e.clientY-$pos.top+10
+      });
+  });
+  $box.mouseout(function () {
+      $mark.hide();
+  });
+</script>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #div img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div>
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+    dsfasdfasdfasdfsdfasdfsd
+</div>
+<div id="div"><img src="./img/1.jpg" alt=""></div>
+<script>
+    var oDiv=document.getElementById('div');
+        oDiv.onmousedown=down;
+        //改变某个函数中的this指向并且传事件对象e
+        function prossThis(fn,context) {
+        return function (e) {//返回函数定义阶段
+            e=e||window.event;
+            fn.call(context,e)
+        }
+    }
+    function down(e) {
+        e=e||window.event;
+        //物体本身的距离:left  top鼠标落脚点pageX  pageY
+        //把left  top保存到自定义属性里面
+        this.left=this.offsetLeft;
+        this.top=this.offsetTop;
+        this.x=e.pageX;
+        this.y=e.pageY;
+        if(this.setCapture){//设置焦点
+            this.setCapture();
+            this.onmousemove=move;
+            this.onmouseup=up;
+        }else{//document;
+            var _this=this;
+            // document.onmousemove=function (e) {
+            //     move.call(_this,e);
+            // };
+            // document.onmouseup=function (e) {
+            //     up.call(_this,e)
+            // };
+            document.onmousemove=prossThis(move,this);//这里的this指向的是oDiv,只是返回值的那个匿名函数里面的this指向document  注意这里的this要找当前down作用域下的this此时是oDiv
+            document.onmouseup=prossThis(up,this);//这里的this指向的是oDiv,只是返回值的那个匿名函数里面的this指向document 注意这里的this要找当前down作用域下的this此时是oDiv
+        //阻止默认事件
+            e.preventDefault();
+        }
+    }
+
+    function move(e) {
+        e=e||window.event;
+            //left+e.pageX-之前的e.pageX;
+        this.style.left=this.left+e.pageX-this.x+'px';
+        this.style.top=this.top+e.pageY-this.y+'px';
+    }
+
+    function up() {
+        if(this.releaseCapture){//释放焦点 IE浏览器
+            this.releaseCapture();
+            this.onmousemove=null;
+            this.onmouseup=null;
+        }else{//document标准浏览器
+            document.onmousemove=null;
+            document.onmouseup=null;
+        }
+    }
+
+    // function f1(context) {
+    //     return function (e) {
+    //         console.log(this===context)
+    //         console.log(this);
+    //         console.log(context)
+    //     }
+    // }
+    // oDiv.onclick=f1(this)
+</script>
+</body>
+</html>

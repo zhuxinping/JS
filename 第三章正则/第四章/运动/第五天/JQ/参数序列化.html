@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表单序列化</title>
+</head>
+<body>
+<form action="">
+    <input type="text" name="zhufeng">
+    <p><input type="radio" name="sex" value="girl">女</p>
+    <p><input type="radio" name="sex" value="box">男</p>
+    <p><input type="checkbox" name="like" value="dance">跳舞</p>
+    <p><input type="checkbox" name="like" value="smoking">吸烟</p>
+    <p><input type="checkbox" name="like" value="drinking">喝酒</p>
+    <input id="upBtn" type="button" value="提交">
+</form>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    $('#upBtn').click(function () {
+           // console.log(1);
+           // var res=$('form').serializeArray();
+            var res=$('form').serialize();
+            console.log(res);
+    });
+    $.ajax({
+        type:'get',
+        url:'json/banner.json',
+        data:$('form').serialize(),//表单序列化
+        success:function (val) {
+            console.log(val);
+        }
+    });
+</script>
+</html>

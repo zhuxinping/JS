@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //批量设置原型上的公有属性和方法
+    //1.起别名
+    // function Fn() {
+    //     this.x=100;
+    // }
+    // var pro=Fn.prototype;//把原来原型指向 地址赋值给我们的pro现在他们操作的是同一个内存空间
+    // pro.getX=function () {
+    //     console.log(this.x);
+    // }
+    // pro.getY=function () {
+    //     console.log(this.x);
+    // }
+    // pro.getZ=function () {
+    //     console.log(this.x);
+    // }
+    // var f1=new Fn;
+//2.重构原型对象的方式:自己新开盘一个堆内存，存储我们公有的属性和方法,把浏览器天生开辟的堆空间替换掉
+//     function Fn() {
+//         this.x=100;
+//     }
+//     Fn.prototype={//原型链也是一个对象
+//         constructor:Fn,
+//             a:function () {
+//
+//         },
+//         b:function(){
+//
+//         }
+//     }
+//     var f=new Fn;
+//     console.log(f.constructor);//->往上查找到Object
+    //1.只有浏览器天生给Fn.prototype才有constructor，而我们自己开辟的这个堆内存没有这个属性，会往上查找到Object
+//这样constructor指向不再是Fn而是Object,为了和原来保持一致我们需要手动为其添加constructor:Fn
+    //2.用这种方式给内置类增加公有属性
+    //给内置类Array增加数组去重的方法
+    // Array.prototype.unique=function(){
+    //
+    // };
+    // Array.prototype={
+    //     constructor:Array,
+    //     unique:function () {
+    //
+    //     }
+    // }
+    // //这样会出问题
+    // console.dir(Array.prototype);
+    //我们这种方式会把之前存在于原型上的属性和方法给替换掉,所以用这种方式修改内置类的话，浏览器会给屏蔽掉的
+  //但是我们可以一个个的修改内置的方法，当我们通过下述方式在数组的原型上添加方法
+    //如果方法名和原来内置的重复了,会把人家内置的修改掉--->我们以后再内置类的原型上增加方法命都需要加特殊的前缀
+    //
+    Array.prototype.sort=function () {
+      console.log("ok");
+    };
+    var ary=[1,2,5,6,7,8,7,7,7];
+    ary.sort();
+    console.log(ary);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // Object.create();方法创建一个拥有指定原型和若干个指定属性的对象
+    //Object.create(proObj);创建一个新的对象，但是还要把proObj作为这个对象的原型  在IE6 7 8不兼容  ES5新增加的方法
+    // var obj={
+    //     constructor:Fn,
+    //     getX:function () {
+    //     }};//obj=xxfff000;
+    //克隆对象把属性方法都放到原型链上
+    // var obj2={};
+    // for(var key in obj){
+    //     if(obj.hasOwnProperty(key)){
+    //         obj2[key]=obj[key];
+    //     }
+    // }
+    // function Fn() {
+    //
+    // }
+    // var obj3=Object.create(obj);
+    // console.log(obj3);
+    // //创建一个新的对象obj3把obj中私有属性和方法放到obj3所属类Fn的原型上
+    // Fn.prototype=obj;//Fn.prototype=xxxfff000;
+    // // Fn.prototype.sum=function () {
+    // //
+    // // };
+    // var f=new Fn;
+    //console.log(f);
+    // var obj={getX:function () {
+    //         console.log();
+    //     }}
+    //     var obj2=Object.create(obj);
+    // //obj2->obj2;
+    // //__proto__:
+    // //getX:function () {
+    // //}
+    // //__proto__:Object.prototype
+    // obj2.getX();
+    // obj.getY=function () {
+    //     console.log(2);
+    // }
+    // obj.getY();
+    var obj={
+           getX:function () {
+             }};
+    function object(o) {
+        //创建一个类
+        function Fn() {
+
+        }
+        Fn.prototype=o;//Fn的原型指向obj
+        return new Fn;//返回一个指向obj原型的实例
+    }
+    var newObj=object(obj);
+    console.log(newObj);
+    function Sum() {
+
+    }
+    Sum.prototype=object(obj);
+    Sum.prototype.constructor;
+</script>
+</body>
+</html>

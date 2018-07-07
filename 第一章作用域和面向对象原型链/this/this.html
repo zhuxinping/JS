@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="div1">有本事点我啊</div>
+<script>
+    //在js中主要研究的都是函数中的this
+    //JS中的this代表的是当前行为执行的主体
+    //JS中的context代表的是当前行为执行的环境
+    //例如:张三在沙县小吃 吃蛋炒饭，this->张三  context->沙县小吃
+    //this是谁和函数在哪定义的和在哪执行的都没有任何关系，只和执行主体有关  如何区分this
+
+   //  console.log(this);//window
+   //  function 吃饭() {
+   //      //this->张三
+   //  }
+   // // 张三.吃饭();
+   //  ~function () {
+   //      张文静.吃饭();
+   //  }();
+
+//1.函数执行,首先看函数名前面是否有.有的话.前面是谁this就是谁,没有的话this就是window
+//2.自执行函数中的this永远是window
+    //3.给元素的某一个元素绑定方法，当事件触发的时候，执行对应的方法,方法中的this是当前元素
+    function fn() {
+        console.log(this);
+    }
+    // var obj={
+    //     fn:fn
+    // };
+    // fn();//this指向window
+    // obj.fn();//指的是obj
+    // function sum() {
+    //     fn();//this指向window  跟在哪执行无关
+    // }
+    // sum();//this指向window
+    //
+    // var oo={
+    //     sum:function () {
+    //         console.log(this);//->oo
+    //         fn();//this->window
+    //     }
+    // }
+    // oo.sum();
+// let oDiv=document.getElementById('div1');
+    //.给元素的某一个元素绑定方法，当事件触发的时候，执行对应的方法,方法中的this是当前元素
+//oDiv.onclick=fn;//此时fn中this是oDiv
+//     oDiv.onclick=function () {
+//         console.log(this);//oDiv
+//         fn();//window
+//     }
+//     (function () {
+    //         console.log(this);//window
+    //     })();
+    //4.构造函数中:this->当前类的实例
+    function CreateJSPerson(name,age) {
+        //浏览器默认创建的对象就是我们的实例p1->this  p1.name=name;
+        this.name=name;
+        this.age=age;
+        this. writeJs=function () {
+            console.log("my name is "+this.name+" i can write js！");
+        };
+        //浏览器再把创建的实例默认的进行返回
+    }
+    var p1=new CreateJSPerson("zhuxp",18);
+    p1.writeJs();
+</script>
+</body>
+</html>

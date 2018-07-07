@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var n=0;//定时器不是越小越快,而是越不准确
+    // setTimeout(function () {
+    //     n+=2;
+    //     alert(n);
+    // },0);
+    // alert(n);//先0后2
+    // var n=0;
+    // setTimeout(function () {
+    //    n+=2;
+    //    alert(n)
+    // },0)
+    // while (++n){
+    // //同步中如何死循环就没机会回头看异步的操作了
+    // }
+    // alert(n);
+    // setTimeout(function () {
+    //     n+=2;
+    //     alert(n);//7
+    // },30);
+    // alert(n);//->0
+    // setTimeout(function () {
+    //     n+=5;
+    //     alert(n);//5
+    // },10);
+    // for(var i=0;i<1000000;i++){
+    //
+    // }
+    // alert(n);//0
+    //两个定时器时间太小无法判定谁前谁后
+    setTimeout(function () {
+        n+=2;
+        alert(n);
+    },3);
+    alert(n);//0
+    setTimeout(function () {
+        n+=5;
+        alert(n);
+    },1);
+    for(var i=0;i<1000000;i++){
+
+    }
+    alert(n);//0
+    //任务池中会按照时间从小到大排序
+
+</script>
+</body>
+</html>

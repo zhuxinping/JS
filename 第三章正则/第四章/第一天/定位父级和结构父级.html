@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            padding: 100px;
+            border:10px solid #000;
+        }
+        #div1{
+            width: 600px;
+            height: 400px;
+            background: red;
+        }
+        #div2{
+            width: 400px;
+            height: 300px;
+            background: green;
+            position: relative;
+        }
+        #div3{
+            width: 200px;
+            height: 100px;
+            background: blue;
+            position: absolute;
+            left: 200px;
+            top: 300px;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+    <div id="div2">
+        <div id="div3"></div>
+    </div>
+</div>
+<script>
+    var oDiv3=document.getElementById('div3');//
+    //需求:用代码找到oDiv3所有的结构父级 ；以及oDiv3结构父级中最大的元素;
+    // var par=oDiv3.parentNode;
+    // var ary=[];
+    // while (par){
+    //     ary.push(par);
+    //     par=par.parentNode;
+    // }
+    // console.log(ary);//[div#div2, div#div1, body, html, document]
+    var par=oDiv3.offsetParent;
+    var ary=[];
+    while (par){
+        ary.push(par);
+        par=par.offsetParent;
+    }
+    //console.log(ary);//[div#div2, body]定位父级最大的元素是body
+
+</script>
+</body>
+</html>

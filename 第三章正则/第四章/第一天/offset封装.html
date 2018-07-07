@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            padding: 100px;
+            border:10px solid #000;
+        }
+        #div1{
+            width: 600px;
+            height: 400px;
+            background: red;
+        }
+        #div2{
+            width: 400px;
+            height: 300px;
+            background: green;
+            position: relative;
+        }
+        #div3{
+            width: 200px;
+            height: 100px;
+            background: blue;
+            position: absolute;
+            left: 200px;
+            top: 300px;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+    <div id="div2">
+        <div id="div3"></div>
+    </div>
+</div>
+<script>
+    /**
+     * offset: 获取当前元素到body的距离;
+     * 参数:curEle;
+     * 返回值:返回一个引用数据类型{left:xxx.top:xxx}
+     *
+     *
+     * */
+    var oDiv3=document.getElementById('div3');
+    function offset(curEle) {
+        var par=curEle.offsetParent;
+        var l=curEle.offsetLeft;
+        var t=curEle.offsetTop;
+        while (par){
+            //IE8浏览器下offsetLeft已经包含了边框
+            //只有在非IE8浏览器才需要累加边框
+            if(window.navigator.userAgent.indexOf('MSIE 8')===-1){//不是IE8
+                l+=par.clientLeft;
+                t+=par.clientTop;
+            }
+            l+=par.offsetLeft;
+            t+=par.offsetTop;
+            par = par.offsetParent;
+        }
+        return{left:l,top:t};
+    }
+    res=offset(oDiv3);
+    console.log(res.left);
+</script>
+</body>
+</html>

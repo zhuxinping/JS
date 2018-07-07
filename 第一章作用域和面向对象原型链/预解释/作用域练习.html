@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function fn() {
+        var i=10;
+        return function (n) {
+            console.log(n+(++i));
+        }
+    }
+    var f=fn();
+    f(10);//21此时i变成11
+    f(20);//32//此时i变12
+    //每次函数执行会重新开辟一个作用域
+    fn()(10);//21执行完毕会销毁
+    fn()(20);//31
+</script>
+</body>
+</html>

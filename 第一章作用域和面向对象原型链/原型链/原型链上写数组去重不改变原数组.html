@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    Array.prototype.myUnique=function () {
+        //创建一个新的数组类接受
+        var newArray=new Array();
+        // this.forEach((item,index,array)=>{
+        //     if(newArray.indexOf(array[index])==-1){
+        //         newArray.push(array[index])
+        //     }
+        // });
+        this.forEach((item,index,array)=>{
+            if(newArray.indexOf(this[index])==-1){
+                newArray.push(this[index])
+            }
+        });
+        //这边返回的是一个数组类  所以可以链式操作
+        return newArray;
+    }
+    var ary=[1,2,3,4,4,5,6,6,4,2,0];
+    let res=ary.myUnique().sort(function (a,b) {
+        return a-b;
+    });
+    console.log(res);
+    console.log(ary);
+</script>
+</body>
+</html>

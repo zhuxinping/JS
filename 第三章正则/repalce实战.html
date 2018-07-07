@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var str="20151213";
+    var ary=["零","壹","贰","叁","肆","伍","陆","柒","捌","玖"];
+    //获取每个字符串根据数字当成索引获取ary中的文字
+
+   // str = str.replace(/\d/g,function () {
+   //     var num=arguments[0];
+   //     return ary[num];
+   //  });
+   // console.log(str);
+    str = str.replace(/\d/g,function () {
+        return ary[arguments[0]];
+    });
+    console.log(str);
+</script>
+</body>
+</html>

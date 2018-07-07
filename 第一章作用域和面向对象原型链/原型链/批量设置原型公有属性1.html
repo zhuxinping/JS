@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Fn() {
+        this.x=100;
+    }
+    // var pro=Fn.prototype;
+    // pro.a=function () {
+    //
+    // }
+    // pro.b=function () {
+    //
+    // }
+    // pro.c=function () {
+    //
+    // }
+   Fn.prototype={
+        constructor:Fn,
+        b:function () {
+            
+        }
+   }
+   var f=new Fn;
+
+</script>
+</body>
+</html>

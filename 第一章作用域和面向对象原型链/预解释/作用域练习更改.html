@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var i;
+    function fn() {
+        i=10;
+        //console.log(i)
+        return function (n) {
+            console.log(i);//
+            console.log(n+(++i));//里面的i会改变全局作用域的i的值
+        }
+    }
+    var f=fn();
+    f(10);//21此时i变成11
+    f(20);//32//此时i变12
+    //每次函数执行会重新开辟一个作用域
+    fn()(10);//21执行完毕会销毁
+    fn()(20);//31
+</script>
+</body>
+</html>

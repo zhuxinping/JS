@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function fn(i) {
+        return function (n) {
+            console.log(n+i++);
+            //形参也是私有的变量
+        }
+    }
+    var f=fn(13);
+    f(12);//25
+    f(14);//28
+    fn(15)(12);//27
+    fn(16)(13);//29
+    //用闭包作用域的方式实现选项卡循环绑定事件的处理
+</script>
+</body>
+</html>

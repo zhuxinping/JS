@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        #box{
+            width: 360px;
+            height: 90px;
+            margin: 50px auto;
+            overflow: hidden;
+            border: 1px solid #f90;
+            position: relative;
+        }
+        #box ul{
+            position: absolute;
+            height: 90px;
+            left: 0;
+            top: 0;
+        }
+        #box ul li{
+            float: left;
+            width: 90px;
+            height: 90px;
+        }
+    </style>
+</head>
+<body>
+<div id="box">
+    <ul>
+        <li>
+            <img src="./img/zf_course1.png" alt="">
+        </li>
+        <li>
+            <img src="./img/zf_course2.png" alt="">
+        </li>
+        <li>
+            <img src="./img/zf_course3.png" alt="">
+        </li>
+        <li>
+            <img src="./img/zf_course4.png" alt="">
+        </li>
+
+    </ul>
+</div>
+</body>
+<script src="js/utils.js"></script>
+<script>
+    window.onload=function () {
+        var oBox=document.getElementById('box');
+        var oUl=oBox.getElementsByTagName('ul')[0];
+        var oLi=oUl.getElementsByTagName('li');
+        var curLeft=utils.getCss(oUl,'left');
+        var timer=null;
+        //1.把ul的内容重新copy一份,折行因为ul宽度
+        oUl.innerHTML+=oUl.innerHTML;
+       // oUl.style.width=oLi[0].offsetWidth*oLi.length+'px';
+        oUl.style.width=utils.getCss(oLi[0],'width')*oLi.length+'px';
+       function auto() {
+           clearInterval(timer);
+           timer=setInterval(function () {
+               if(curLeft<=-utils.getCss(oUl,'width')/2){
+                   curLeft=0;
+               }
+               curLeft-=2;
+               oUl.style.left=curLeft+'px';
+           },30);
+       }
+        auto();
+       oUl.onmouseover=function () {
+           clearInterval(timer);
+        }
+        oUl.onmouseout=function () {
+            auto();
+        }
+    }
+</script>
+</html>

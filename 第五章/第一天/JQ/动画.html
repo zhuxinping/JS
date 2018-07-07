@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 200px;
+            margin: 0 auto;
+        }
+        .box input{
+            width: 100%;
+            height: 40px;
+        }
+        .box div{
+            width: 200px;
+            height: 300px;
+            background: red;
+            position: absolute;
+            left: 50%;
+            margin-left: -100px;
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <input type="button" value="动画">
+    <div class="inner"></div>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+     $('.box input').click(function () {
+         //$('.inner').hide(1000);
+        // $('.inner').stop().toggle(1000);//stop()相当于停止定时器
+         //$('.inner').stop().slideToggle();
+        // $('.inner').stop().fadeIn();
+         //$('.inner').stop().fadeOut();
+         //$('.inner').stop().fadeToggle();
+         $.ajax();//静态方法static  实例无法调用
+         //jQuery.ajax();
+         $('div').html();
+     });
+     $.extend({});//给类添加私有属性和方法--静态方法 $.xxx();
+     $.fn.extend({});//给原型上添加属性和方法---实例可以调用 $().xxx();
+</script>
+</html>

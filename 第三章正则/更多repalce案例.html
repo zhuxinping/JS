@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//正则的补货:正则的exec方法 字符串的match方法 字符串的replace方法
+//     var str="zhuxingping1314zhuxingping1314";
+//     str=str.replace(/(zhu)(xing)(ping)/g,function () {
+//         console.log(arguments);
+//         return "悟空";//替换的只是大正则的内容不写return默认用undefined替换 如果不想替换 我们就返回原有的内容
+//     });
+//     console.log(str);
+// var str="zhuxingping1314zhuxingping1314";
+// str=str.replace(/(zhu)(xing)(ping)/g,function () {
+//     console.log(arguments);
+//     return arguments[0];//替换的只是大正则的内容不写return默认用undefined替换 如果不想替换 我们就返回原有的内容
+// });
+// console.log(str);
+    //将小写的数字替换成大写的中文数字
+//     var str="我的工资是2008";
+// var ary=["零","壹","贰","叁","肆","伍","陆","柒","捌","玖"];
+//     str=str.replace(/\d/g,function () {
+//         console.log(arguments);
+//         return ary[arguments[0]];
+//     })
+//     console.log(str);
+    //2.获取一个字符串中出现次数最多的字符 并且获取出现次数
+   //  var str="zzzzzhuxingping2016yangfanqihang";
+   //  var obj={};
+   //  str=str.replace(/[a-z]/gi,function () {
+   //    var val=arguments[0];
+   //    // if(obj[val]>=1){
+   //    //     obj[val]+=1;
+   //    // }else{
+   //    //     obj[val]=1;
+   //    // }
+   //      obj[val]>=1?obj[val]+=1:obj[val]=1;
+   //  });
+   // // console.log(obj);
+   //  //假设法获取出现次数最多的字符
+   //  var maxNum=0;
+   //  for(var key in obj){
+   //      obj[key]>maxNum?maxNum=obj[key]:null;
+   //  }
+   //  console.log(maxNum);
+   //  //把符合出现maxNum次都获取到
+   //  var ary=[];
+   //  for(var key in obj){
+   //      obj[key]===maxNum?ary.push(key):null;
+   //  }
+   //  console.log("整个字符串出现次数最多的字符是:"+ary.toString()+"出现了"+maxNum+"次~");
+    //3.模板引擎
+//     var str="my name is{0},my age is {1},i come from{2},i love{3}";
+// var ary=["朱杏平","28","china","javascript"];
+// str=str.replace(/{(\d+)}/g,function () {
+//
+//     return ary[arguments[1]];
+// });
+// console.log(str);
+    //1. "2015-9-22 13:10:00"  "2015年9月22日  13时10分00秒"
+    //2.把一个字符串中所有单词的首字母大写"zhuxingping"->"ZhuXingPing"
+    //4解析url参数
+    var str="http://www.baidu.com?mid=1000&cid=146";
+    var reg=/([^?=&]+)=([^?=&]+)/g;
+    //捕获exec
+// var obj={};
+// var res=reg.exec(str);
+//     while (res){
+//         obj[res[1]]=res[2];
+//         res=reg.exec(str);
+//     }
+//     console.log(obj);
+var obj={};
+str=str.replace(reg,function () {
+    obj[arguments[1]]=arguments[2];
+});
+console.log(obj);
+function urlString(str) {
+    var reg=/([^?=&]+)=([^?=&]+)/g;
+    var obj={};
+    str.replace(reg,function () {
+        obj[arguments[1]]=arguments[2];
+    });
+    return obj;
+}
+</script>
+</body>
+</html>

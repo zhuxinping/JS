@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="box">
+    <h2>问题:点赞</h2>
+    <div id="btn">我非常赞同上面观点
+    <span id="spanNum">0</span></div>
+</div>
+<script>
+    var oBtn=document.getElementById('btn');
+    var spanNum=document.getElementById('spanNum');
+    // oBtn.onclick=function () {
+    //     var count=0;
+    //     count++;
+    //     spanNum.innerHTML=count;
+    // }
+    //解决办法
+    //1.全局的方法:利用全局作用域不销毁的原理把需要累加的数字定义为全局的变量   这个方法不推荐 容易冲突
+    // var count=0;
+    // oBtn.onclick=function () {
+    //     count++;
+    //     spanNum.innerHTML=count;
+    // }
+    //2.自己形成一个不销毁的私有作用域来保存我们需要的累加的数字
+    //自执行函数会形成一个私有作用域来保存我们的私有变量不会被销毁
+    (function () {
+        var count=0;
+        oBtn.onclick=function () {
+            count++;
+            spanNum.innerHTML=count;
+        }
+    })();
+    //每次点击都会形参一个私有作用域，执行完毕会销毁作用域所以每次都是重新给conut赋值为0这样达不到我们要的效果
+//自执行函数会包裹一个作用域 形成一个变量容器
+    //3.
+    // oBtn.onclick=(function () {
+    //     var count=0;
+    //     return function () {
+    //         count++;
+    //         spanNum.innerHTML=count;
+    //     }
+    // })();
+    //点的是时候相当于执行function () {
+    // count++;
+    // spanNum.innerHTML=count;
+    // }只不过此时在自执行函数里面形成不销毁的作用域保存了私有变量
+    //自执行函数返回一个引用数据类型被外面的onclick接收了 形成不销毁的作用域此时其上级作用域的私有变量不销毁
+    //弊端:有一个不销毁的私有作用域，所以占那么一丢丢的内存
+
+    //4.利用innerHTML的方式处理:每次都从去页面拿到数据点击加一次 赋值一次
+    // oBtn.onclick=function () {
+    //     //spanNum.innerHTML=parseInt(spanNum.innerHTML)+1;
+    //     spanNum.innerHTML++;
+    // }
+    //弊端每次都要从页面拿数据然后渲染页面 影响性能
+    //推荐利用自定义属性存储(推荐的方式)
+    //5.自定义属性
+    oBtn.count=0;//这个属性名是属性 既不是全局也不是私有的变量
+    oBtn.onclick=function () {
+        //spanNum.innerHTML=parseInt(spanNum.innerHTML)+1;
+        spanNum.innerHTML=++this.count;
+    }
+</script>
+</body>
+</html>

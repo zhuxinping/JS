@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            height: 100%;
+            overflow: hidden;
+        }
+        div{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: red;
+        }
+        .div2{
+            left: 200px;
+            background: yellow;
+        }
+        .div3{
+            left: 400px;
+            background: blue;
+        }
+        .div4{
+            left: 600px;
+            background: orange;
+        }
+        /*#div img{*/
+        /*width: 100%;*/
+        /*height: 100%;*/
+        /*background: #3b5998;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<div id="div" class="div1">拖动</div>
+<div id="div2" class="div2">拖动</div>
+<div id="div3" class="div3">拖动</div>
+<div id="div4" class="div4">拖动</div>
+<script src="js/utils.js"></script>
+<script src="js/event.js"></script>
+<script src="js/Drag2.js"></script>
+<script src="js/effect.js"></script>
+<script>
+ // var oDiv=document.getElementById('div');
+ // var oDiv2=document.getElementById('div2');
+ // var drag1=new Drag(oDiv);
+ // var drag2=new Drag(oDiv2);
+ //    drag1.on('selfDown',fn1);//订阅 先把这个方法提前放入事件池中 当鼠标被按下会监听事件然后触发fn1执行
+ //    drag1.on('selfMove',fn2);//订阅 先把这个方法提前放入事件池中 当鼠标被按下会监听事件然后触发fn2执行
+ //    function fn1() {
+ //        console.log('selfDown');
+ //    }
+ // function fn2() {
+ //     console.log('selfMove');
+ // }
+    var aDiv=document.getElementsByTagName('div');
+    var zIndex=0;
+    for(var i=0;i<aDiv.length;i++){
+        var cur=aDiv[i];
+        var l=utils.win('clientWidth')-cur.offsetWidth;
+        var t=utils.win('clientHeight')-cur.offsetHeight;
+        //这是客户端的订阅模式
+        // new Drag(cur).on('selfDown',creaseIndex).on('selfDown',clearEffect)
+        //     .on('selfMove',getSpeedX)
+        //     .on('selfUp',fly)
+        //     .on('selfUp',drop);//客户端开发
+        //客户端直接点用
+        new Drag(cur).jump();
+    }
+</script>
+</body>
+</html>

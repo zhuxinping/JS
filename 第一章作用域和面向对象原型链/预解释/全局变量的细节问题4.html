@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //在全局作用域中,带var不带var的关系
+    //区别:带var可以进行预解释，所以在赋值的前面执行不会报错;不带var不能进行预解释，在前面执行会报错
+    //  var num=12;//相当于给全局作用域增加了一个全局变量num,但是不仅如此他也相当于给window增加了一个属性名num属性值是12
+    // console.log(num);
+    // // //在全局作用域下全局变量加var 不加var区别
+    // // // for(var i=0;i<10;i++){
+    // // //
+    // // // }
+    // //num2 is not defined  报错
+    // num2=13;//关系:num2=13->相当于给wnidow增加了一个叫做num3的属性名，属性值是13  window.num2;
+    // console.log(num2);
+    //私有作用域中出现的一个变量不是私有的则往上级作用域查找，上级没有则继续向上查找，一直找到window为止,如果window也没有
+    //1)如果我们是获取值:结果报错
+    //2)如果我们是设置值total=100;相当于给window增加一个属性名total属性值是100
+    function fn() {
+        //console.log(total);//作用域链找不到报错
+         total=100;
+    }
+    fn();
+    console.log(total);//100
+    //JS中如果不进行如何特殊处理的情况下，上面的代码报错，下面的代码都不再执行
+</script>
+</body>
+</html>

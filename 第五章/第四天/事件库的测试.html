@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div id="div"></div>
+</body>
+<script src="js/event3.js"></script>
+<script>
+    var oDiv=document.getElementById('div');
+    function fn1() {
+        console.log(1);
+    }
+    function fn2() {
+        console.log(2);
+    }
+    function fn3() {
+        console.log(3);
+    }
+    function fn4() {
+        console.log(4);
+    }
+    // bind(oDiv,'click',function () {
+    //     console.log(1);
+    // });
+    // bind(oDiv,'click',function () {
+    //     console.log(2);
+    // });
+    // bind(oDiv,'click',function () {
+    //     console.log(3);
+    // });
+    on(oDiv,'click',fn1);
+    on(oDiv,'click',fn2);
+    on(oDiv,'click',fn3);
+    on(oDiv,'contextmenu',function (e) {
+        e.preventDefault();
+    });
+    on(oDiv,'click',fn4);
+    off(oDiv,'click',fn4);
+    // unbind(oDiv,'click',fn1);
+    // bind(oDiv,'click',fn2);
+    //unbind(oDiv,'click',fn2);
+    //这种方式不能够解绑 因为无法知道函数的指针
+    //标准浏览器二级事件 会按顺序执行   IE浏览器顺序不固定
+
+
+</script>
+</html>

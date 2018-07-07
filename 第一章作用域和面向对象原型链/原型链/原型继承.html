@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型继承</title>
+</head>
+<body>
+<div id="div1"></div>
+<script>
+    //#div.__proto_->HTMLDivElement.prototype->HTMLElement.prototype->Element.prototype->Node.prototype->EventTarget.prototype->Object.prototype
+   //构造函数 可以形成类 只有类才有原型prototype  对象数据类型有__proto__属性属性值是当前实例所属类的原型,每一个对象数据类型(普通的对象、实例、prototype都是对象数据类型)
+   //  function myObject() {
+   //
+   //  }
+   //  myObject.prototype={
+   //      constructor:Object,
+   //      hasOwnProperty:function () {
+   //
+   //      }
+   //  }
+   //  function myEventTarget() {
+   //
+   //  }
+   //  myEventTarget.prototype=new Object();
+   //  myEventTarget.prototype.addListener=function () {
+   //
+   //  };
+   //  function myNode() {
+   //
+   //  }
+   //  myNode.prototype=new myEventTarget();
+   //  myNode.prototype.createElement=function () {
+   //
+   //  }
+   //  var n=new myNode();
+   //  console.log(n);
+    //原型链继承
+    //让子类的原型等于父类的一个实例  实例会通过__proto__一级一级往上查找，知道Object类
+    
+    function A() {
+        this.x=100;
+    }
+    A.prototype.getX=function () {
+        // console.log(this.x);
+        // console.log(this);
+    }
+    function B() {//
+        this.x=200;
+        this.getX=function () {
+            //console.log(this.x);
+            //console.log(this);
+        }
+    }
+    //如果我们自己重写B.prototype就需要手动增加    B.prototype.constructor=B;
+    B.prototype=new A();//实例是一个对象 这个实例具有自己的私有属性也有公有方法,把这个实例对象引用地址赋值给B的原型,这样B也就具有A的一切属性和方法
+    B.prototype.constructor=B;
+    console.log(B.prototype.constructor);
+    var b=new B;
+  B.prototype.getX();//this指向A
+    //原型继承是我们JS中最常用的一种继承方法
+    //子类B想要继承父类A中的所有的属性和方法(私有的和公有的)
+    //只需要让  B.prototype=new A();即可
+    //原型继承特点:它是把父类中私有的+公有的都继承到子类的原型上(子类公有的)
+    b.getX();//200 B如果没有增加constructor属性值 那么最终会指向父类A
+    //原型链继承核心:原型继承并不是把父类的属性和方法克隆一份来用，而是让B和A之间增加了原型链连接,以后B的实例要用A中的方法，需要一级一级往上查找来用
+    //多态:重写  子类通过原型链重写父类的方法
+
+</script>
+</body>
+</html>

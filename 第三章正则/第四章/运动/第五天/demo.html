@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            position: relative;
+            /*width: 200px;*/
+            height: 200px;
+        }
+        .box div{
+            /*position: absolute;*/
+            /*left: 0;*/
+            /*top: 0;*/
+            z-index: 0;
+            width: 200px;
+            height: 200px;
+            font-size: 50px;
+            /*opacity: 0;*/
+        }
+    </style>
+</head>
+<body>
+<div class="box">
+    <div>1</div>
+    <div>2</div>
+    <div>3</div>
+</div>
+</body>
+<script src="js/utils.js"></script>
+<script src="js/move.js"></script>
+<script>
+    var $=document.querySelectorAll.bind(document);
+    var oBox=$('.box')[0];
+    var oDiv=oBox.getElementsByTagName('div');
+    // console.log(oDiv);
+    // utils.css(oDiv[1],'zIndex',1);
+    // animate({
+    //     id:oDiv[0],
+    //     target:{
+    //         opacity:1
+    //     }
+    // })
+    // for(var i=0;i<oDiv.length;i++){
+    //    oDiv[i].onclick=function () {
+    //        console.log(i)//->3  这里是异步最终结果是3
+    //    }
+    //     // console.log(this);->window
+    // }
+    for(let i=0;i<oDiv.length;i++){
+        console.log(i)
+        oDiv[i].onclick=function () {
+            console.log(i)
+        }
+        // console.log(this);->window
+    }
+    // 以上示例的工作原理是因为（匿名）内部函数的五个实例引用了变量i的五个不同实例。
+    // 注意，如果你将let替换为var，则它将无法正常工作，因为所有内部函数都将返回相同的i：6的最终值。
+    // 此外，我们可以通过将创建新元素的代码移动到每个循环的作用域来保持循环更清晰。
+</script>
+</html>

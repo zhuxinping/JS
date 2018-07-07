@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //在字面量方式中:我们//之间包起来的所有的内容都是元字符,有的具有特殊的意义,
+    //而大部分都是代表本身含义的普通元字符
+    var name="zhuxp";
+    // var reg=/\d+/;
+    // var reg=new RegExp("");
+  //  var str="2015"+name+"zhuxp";//
+  //   var reg=/^\d+"+name+"\d+$/g;
+  //  // console.log(reg.test("2015zhuxp2016"));//false
+  //   console.log(reg.test('2015"""nameeeeee"2016'));//true
+    //对于这样的需求,我们只能使用实例创建的方式了
+    var reg=new RegExp("^\\d+"+name+"\\d+$","g");//\d要转义
+    console.log(reg.test("2015zhuxp2016"));//true
+    //字面量创建和实例创建的方式在正则中的区别
+    //1.)字面量方式中出现的一切都是元字符，所以不能进行变量值的拼接,而实例创建的方式可以
+    //2)字面量方式直接写\d就可以二在实例中需要把它转义\\d
+</script>
+</body>
+</html>

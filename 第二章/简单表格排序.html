@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>表格排序</title>
+</head>
+<body>
+<ul id="ul1">
+    <li>12</li>
+    <li>5</li>
+    <li>6</li>
+    <li>7</li>
+    <li>2</li>
+</ul>
+<script src="js/utils.js"></script>
+<script>
+    var $ = document.querySelectorAll.bind(document);
+    //先把元素集合类数组转化为数组
+    window.onload=function () {
+        //console.log($);
+        var oUl=$("#ul1")[0];
+        var oLis=oUl.children;
+        //console.log(oLis);
+        //先把元素集合类数组转化为数组
+        var ary=utils.listToArray(oLis);
+        //2.给数组进行排序
+        ary.sort(function (a,b) {
+            return parseInt(a.innerHTML)-parseInt(b.innerHTML);
+        });
+        console.log(ary);
+        //3.按照ary中存储的最新顺序依次把对应的LI添加到页面中
+        var frg=document.createDocumentFragment();
+        for(var i=0;i<ary.length;i++){
+            frg.appendChild(ary[i]);
+        }
+        oUl.appendChild(frg);
+        frg=null;
+        //DOM映射:ary
+//         节点的appendChild方法用于在内容末尾插入节点，如果要插入的节点已经在文档中则先剪切再插入。
+//
+// 语法：node.appendChild()
+//
+//         参数：节点对象（a node object）
+//
+// 返回值：插入的节点对象在文档中的引用
+    }
+</script>
+</body>
+</html>

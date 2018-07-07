@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Fn() {
+        this.aa=123;//给实例添加私有属性
+    }
+    Fn.aa=456;//给类添加私有属性
+    var f=new Fn();
+    alert(f.aa);//-?123
+</script>
+</body>
+</html>

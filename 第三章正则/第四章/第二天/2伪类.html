@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        ul{
+            width: 300px;
+        }
+        /*清除浮动*/
+        ul:after{
+            display: block;
+            content: '';
+            clear: both;
+        }
+        li{
+            width: 100%;
+            height: 40px;
+            line-height: 40px;
+            float: left;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<ul>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>中间类继承法不兼容(适合移动端)</title>
+</head>
+<body>
+<script>
+    // function avgFn() {
+    //     Array.prototype.sort.call(arguments,function (a,b) {
+    //         return a-b;
+    //     });
+    //     Array.prototype.pop.call(arguments);//把数组原型中的this用argnments替换执行他的方法
+    //     Array.prototype.shift.call(arguments);
+    //     return eval(Array.prototype.join.call(arguments,"+")/arguments.length).toFixed(2);
+    // }
+    // console.log(avgFn(10,20,30));
+
+
+    function avgFn() {
+        //console.dir(arguments);//类数组 __proto__指向Object 不是一个数组  我们可以模仿数组 给他__proto__一个指向一个数组的原型就可以执行数组的方法了
+     arguments.__proto__=Array.prototype;
+     arguments.sort(function (a,b) {
+         return a-b;
+     });
+        arguments.pop();
+        arguments.shift();
+        return eval(arguments.join("+")/arguments.length).toFixed(2);
+    }
+    console.log(avgFn(10,20,30));
+</script>
+</body>
+</html>

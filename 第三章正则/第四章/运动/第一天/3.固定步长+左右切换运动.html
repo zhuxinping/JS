@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 50px;
+        }
+        #target{
+            position: absolute;
+            left: 1000px;
+            top: 0;
+            width: 1px;
+            height: 300px;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+<input type="button" value="向左走">
+<input type="button" value="向右走">
+<div id="div"></div>
+<div id="target"></div>
+<script src="js/utils.js"></script>
+<script>
+    var aBtn=document.getElementsByTagName('input');
+    var oLeft=aBtn[0];
+    var oRight=aBtn[1];
+    var oDiv=document.getElementById('div');
+    oRight.onclick=function () {
+        move(1000);
+    };
+    oLeft.onclick=function () {
+        move(0);
+    };
+   // var timer=null;//把全局变量放在自定义属性上,防止在模块化开发的时候被覆盖
+    function move(target) {
+        _move();//要调用这个函数,形成递归;
+       function _move() {
+           //求出当前位置
+           var curPos=oDiv.offsetLeft;
+           if(curPos<target){
+               if(curPos+10>=target){
+                   utils.css(oDiv,'left',target);
+               }
+               curPos+=10;
+               utils.css(oDiv,'left',curPos);
+           }else if(curPos>target){//向左走
+               if(curPos-10<=target){
+                   utils.css(oDiv,'left',target);
+                   return;
+               }
+               curPos-=10;
+               utils.css(oDiv,'left',curPos);
+           }else{
+               return;
+           }
+           clearInterval(oDiv.timer);
+           oDiv.timer=setTimeout(_move,10);//每隔10ms调用一次_move
+       }
+    }
+</script>
+</body>
+</html>

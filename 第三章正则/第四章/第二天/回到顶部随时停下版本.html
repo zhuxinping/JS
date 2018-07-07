@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,html{
+            height: 300%;
+            background: -webkit-linear-gradient(top,lightblue,lightgreen,lightcoral,lightpink);
+        }
+        a{
+            display: none;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 100px;
+            font-size: 25px;
+            position: fixed;
+            right: 10px;
+            bottom: 10px;
+            background: dodgerblue;
+            color:#ff00ff;
+            text-decoration: none;
+        }
+        div{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+<a href="javascript:;">toTop</a>
+</body>
+<script src="js/utils.js"></script>
+<script>
+    var oBtn=document.getElementsByTagName('a')[0];
+    var timer=null;
+    var bOK=false;
+    //1.当点击按钮的时候,让滚轮回到顶部
+    //2.首屏不显示按钮,只有滚动距离大于一屏幕才显示按钮
+    window.onscroll=computedDisplay;
+    function computedDisplay() {
+                //定时器+手动影响
+            //当我们手动触发的时候onscroll触发频率比定时器快的时候会把定时器清除掉 从而实现停下来的目的
+            if(bOK) clearInterval(timer);
+            bOK=true;//我们滚动的时候一直设置为true表示要清除定时器不往上跑,但是定时器一直循环让bOK=false所以这里要比较看看谁的速度快，就触发谁
+            //我们的解决办法是设置时间让我们人的滚动的速度能够赶上定时器的速度
+            if(utils.win('scrollTop')>utils.win('clientHeight')){
+                oBtn.style.display='block';
+            }else{
+                oBtn.style.display='none';
+            }
+    }
+    oBtn.onclick=function () {
+        oBtn.style.display='none';
+        window.onscroll=null;
+        var target=utils.win('scrollTop');//被浏览器卷去的高度
+        var duration=1000;
+        var interval=30;//坑>30
+        var step=target/duration*interval;
+        //每次在最新的距离上减去固定的步长,同时 赋值最新的距离
+        clearInterval(timer);
+        timer=setInterval(function () {//纯粹定时器在影响onscroll
+            var curTop=utils.win('scrollTop');
+            //console.log(curTop);
+            if(curTop<=0){
+                clearInterval(timer);
+                window.onscroll=computedDisplay;
+                return;//下面的语句不走了
+            }
+            curTop-=step;
+            utils.win('scrollTop',curTop);
+            bOK=false;
+        },interval);
+    }
+</script>
+</html>

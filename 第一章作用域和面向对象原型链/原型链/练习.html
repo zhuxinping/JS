@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var obj={
+        name:"zhu",
+        age:17,
+        writeJs:function () {
+            console.log("my name is "+this.name+" i can write js！");
+        }
+    }
+    function CreateJSPerson(name,age) {
+        //浏览器默认创建的对象就是我们的实例p1->this  p1.name=name;
+        this.name=name;
+        this.age=age;
+        this. writeJs=function () {
+            console.log("my name is "+this.name+" i can write js！");
+        };
+        //浏览器再把创建的实例默认的进行返回
+        return obj;//手动返回obj对象这时候所有的实例都指向obj
+    }
+    var p1=new CreateJSPerson("zhuxp",18);
+    p1.writeJs();
+    var p2=new CreateJSPerson("lixia",18);
+    p2.writeJs();
+    console.log(p1.writeJs===p2.writeJs);//true
+</script>
+</body>
+</html>

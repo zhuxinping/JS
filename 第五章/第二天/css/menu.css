@@ -1,0 +1,42 @@
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.box{
+    width: 500px;
+    background: -webkit-linear-gradient(top,lightcyan,lightgoldenrodyellow,lightcoral);
+    margin: 10px;
+    padding: 10px;
+}
+.box li{
+    line-height: 30px;
+    position: relative;
+}
+.box li em{
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    top: 7px;
+    background: url("../img/icon.png") no-repeat -59px -28px;
+    /*background: url("../img/icon.png") no-repeat -43px -28px;*/
+}
+.box li em:hover{
+    cursor: pointer;
+}
+.box li span{
+    padding-left: 20px;
+}
+.box ul{
+    display: none;
+}
+.box .two{
+    text-indent: 40px;
+}
+.box .three{
+    text-indent: 80px;
+}
+.box .four{
+    text-indent: 120px;
+}
+

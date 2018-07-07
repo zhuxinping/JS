@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas{
+            border: 1px solid #000;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas" width="800" height="500">sorry!浏览器不支持canvas</canvas>
+<script>
+    var canvas=document.getElementById('canvas');//id获取元素
+    //上下文 创建一个2D环境 以后所有的操作都依赖ctx这个对象
+    var ctx=canvas.getContext('2d');
+    ctx.beginPath();
+    ctx.moveTo(100,100);//鼠标移动到某个坐标
+    ctx.lineTo(200,200);//从哪个坐标画到哪个坐标
+    ctx.lineTo(300,100);
+    ctx.lineTo(600,290);
+    ctx.closePath();
+    ctx.strokeWidth='10px';
+    ctx.strokeStyle='red';
+    //ctx.fillStyle='red';
+    // ctx.fill();
+    ctx.stroke();//画的是线
+</script>
+</body>
+</html>

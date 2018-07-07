@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<script src="js/utils.js"></script>
+<script>
+    //json不是一个单独的数据类型 他只是一个特殊的数据格式->他是对象数据类型
+   // var obj={name:"zhuxp",age:7}//->普通数据格式
+   // var jsonObj={"name":"zhuxp","age":7}//JSON格式对象相对普通格式来说只是把属性名用""包起来
+    //2.window浏览器对象中，提供一个叫做JSON属性。里面提供两个方法
+    //->window.JSON
+    //1.JSON.parse();把json格式字符串转化为json格式对象
+    //2.JSON.stringify();把json格式对象转化为json格式字符串
+    // var jsonStr=JSON.stringify(jsonObj);//"{"name":"zhuxp","age":7}"
+    // var str='{"name":"zhuxp","age":7}';
+    // var jsonObj1=JSON.parse(str);
+    //在IE6-7中,我们的window下没有JSON对象
+    //->JSON格式字符串转化为JSON格式对象
+    var str='{"name":"zhuxp","age":7}';
+   // var res=eval("(+str+)");
+    var jsonObj=utils.jsonParse(str);
+    console.log(jsonObj);
+</script>
+</body>
+</html>

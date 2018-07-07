@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var ary=[10,20,30];
+    var obj={};
+   // var res=ary.map(function () {
+   //      console.log(arguments)
+   //  },obj);
+   // console.log(res);
+    Array.prototype.myMap=function (callback,context) {
+        context=context||window;
+        if('map' in Array.prototype){
+          return this.map(callback,context);//两个作用一个是返回值 一个是阻断
+        }
+        var ary=[];
+        for(var i=0;i<this.length;i++){
+           var res=callback.call(context,this[i],i,this);
+           ary.push(res);
+        }
+        return ary;
+    }
+   let result= ary.myMap(function (item,index,input) {
+      //  console.log(arguments);
+       console.log(this);
+        return item*100;
+    },obj);
+    console.log(result);
+</script>
+</body>
+</html>

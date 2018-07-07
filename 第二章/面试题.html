@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    Function.prototype.myCall=function(context){
+        //myCall方法中的this就是当前我要操作和改变其this关键的那个函数
+        //1.->让fn中this关键字变成context的值->obj
+            //让this这个函数中的"this"关键字变为context
+       //->2.让this方法再执行
+    }
+    function fn1() {
+        console.log(1);
+    }
+    function fn2() {
+        console.log(2);
+    }
+    fn1.call(fn2);//->结果是1//->首先fn1通过原型链机制找到   Function.prototype的call方法
+    //此时call方法执行->此时call这个方法中的this就是我要操作的fn1
+    //在call方法代码执行的过程首先让fn1中this关键字变为fn2然后再让fn1这个方法执行
+    fn1.call.call(fn2);//fn1.call通过原型链机制查找到  Function.prototype的call方法然后再让call方法通过原型再找到 Function.prototype的call方法
+    //因为call本身的值也是一函数，所以同样可以找到 Function.prototype原型,在第二次找到call的时候让方法执行此时的this是fn1.call
+    //首先让这个方法的this变成fn2，然后再让fn1.call执行->2
+    fn1.call.call.call.call.call(fn2);//->2  fn1只是起到查找call方法的作用
+    Function.prototype.call(fn1);// Function.prototype->对应的是一个空函数里面的this变成fn1但是空函数啥都没输出
+    Function.prototype.call.call.call(fn1);//fn1执行的结果
+
+</script>
+</body>
+</html>

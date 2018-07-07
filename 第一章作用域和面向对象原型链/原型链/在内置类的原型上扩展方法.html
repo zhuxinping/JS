@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //数组原型有很多公用方法push shift pop slice sort forEach
+    var ary=[12,23,34,12,111,111,111];
+   //  ary.pop();//实例调用原型上的公用方法 //this->ary
+   // // ary.__proto__.pop();//this->ary.__proto__->Array.prototype
+   //  console.log(ary);
+   //  Array.prototype.pop=function () {
+   //  //this->ary
+   //      this.length--;
+   //  };
+    //链式写法
+    // ary.sort(function (a,b) {
+    //     return a-b;
+    // }).reverse().slice(0,5).pop();//pop执行完 返回的是删除的那个元素不能继续链式操作
+    // console.log(ary);
+    //基于内置类原型扩展方法注意事项:我们自己扩展方法最好加特殊前缀,防止修改内置的方法
+    Array.prototype.myUnique=function myUnique() {
+        var obj={};
+        for(var i=0;i<this.length;i++){
+            var cur=this[i];//this->ary
+            if(obj[cur]==cur){
+                this[i]=this[this.length-1];
+                this.length--;
+                i--;
+                continue;
+            }
+            obj[cur]=cur;
+        }
+        obj=null;
+        return this;//链式写法
+    }
+    ary.myUnique().sort(function (a,b) {
+        return a-b;
+    });
+    console.log(ary);
+</script>
+</body>
+</html>

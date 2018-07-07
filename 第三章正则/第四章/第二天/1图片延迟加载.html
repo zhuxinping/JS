@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片的延迟加载</title>
+    <style>
+        body,html{
+            height: 2000px;
+        }
+        p{
+            position: absolute;
+            top: 1000px;
+            width: 48px;
+            height: 48px;
+            background: url('img/taobao.png') no-repeat center #cccccc;
+        }
+        p img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<p id="p1">
+    <img src="" realImg="./img/zf_course11.png" alt="">
+</p>
+</body>
+<script src="js/utils.js"></script>
+<script>
+    //一开始的时候展示默认的背景占位图 图片真实的地址在自定义属性realImg上保存着
+    //滚轮事件:
+    var oP=document.getElementById('p1');
+    var oImg=oP.getElementsByTagName('img')[0];
+    window.onscroll=function () {
+      var scrollBottom=utils.win('scrollTop')+utils.win('clientHeight');
+       // console.log(scrollBottom);
+        var imgPos=utils.offset(oImg).top+utils.getCss(oImg,'height');
+        //显示图片的条件
+        if(imgPos<=scrollBottom){
+         lazyImg();
+        }
+        function lazyImg() {
+            if(oImg.loaded) return;//已经加载过的避免重复加载
+            var tmpImg=new Image();//<img>
+            //tmpImg:这是一个临时创建的img标签,他的作用是用来检测地址是否正确
+            tmpImg.src=oImg.getAttribute('realImg');
+            tmpImg.onload=function () {
+               // oImg.src=tmpImg.src;
+                oImg.src=this.src;
+                //临时标签没用了此时
+                tmpImg=null;
+                //加载完毕设置一个标志位
+                oImg.loaded=true;
+                console.log('ok');
+                //console.log('图片地址正确');
+            };
+            tmpImg.onerror=function () {
+                oImg.loaded=true;
+                console.log('图片地址错误');
+                oP.style.background='url("./img/err.png") no-repeat center #cccccc';
+                tmpImg=null;
+            };
+        }
+    };
+</script>
+</html>

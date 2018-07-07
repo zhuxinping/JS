@@ -1,0 +1,9 @@
+[
+{"name":"令狐冲","age":38,"attack":99,"sex":0},
+{"name":"任盈盈","age":17,"attack":98,"sex":1},
+{"name":"慕容复","age":18,"attack":100,"sex":0},
+{"name":"小华","age":28,"attack":96,"sex":1},
+{"name":"尹志平","age":15,"attack":97,"sex":0},
+{"name":"小红","age":21,"attack":95,"sex":1},
+{"name":"小王","age":30,"attack":91,"sex":0}
+]

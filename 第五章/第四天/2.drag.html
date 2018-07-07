@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #div img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div id="div"><img src="./img/1.jpg" alt=""></div>
+<script>
+    var oDiv=document.getElementById('div');
+    function f1(context) {
+        return function (e) {
+            console.log(this===context)
+            console.log(this);
+            console.log(e);
+            console.log(context)
+        }
+    }
+    oDiv.onclick=f1(this)
+</script>
+</body>
+</html>

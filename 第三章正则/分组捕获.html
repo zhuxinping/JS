@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //12-(23*13)改变优先级
+    //正则分组
+    //1.改变优先级
+    //2.分组引用
+    //\2 代表 和第二个分组出现一抹一样的内容; \1和第一个分组出现一抹一样的内容
+    //一抹一样:和对应的分组中的内容值都要一样
+    //(?:)在分组中?:意思是只匹配不捕获
+//分组捕获:-》正则在捕获的时候 不仅仅把大正则匹配的内容捕获到 也把分组的小正则匹配的内容也捕获到
+// var reg=/^(\w)\1(\w)\2$/;
+//     console.log(reg.test("zzff"));//true
+//     console.log(reg.test("zof_"));//true
+    //身份证号码:
+    var reg=/^\d{17}(\d|X)$/;//正则捕获
+var reg = /^(\d{2})(\d{4})(\d{4})(\d{2})(\d{2})(?:\d{2})(\d)(?:\d|X)$/;
+var str="350521198811038017";
+     console.log(reg.exec(str));//["350521198811038017", "35", "0521", "1988", "11", "03", "80", "1", "7", index: 0, input: "350521198811038017", groups: undefined]
+//     //ary[0]->大正则捕获的内容
+//     //ary[1]->第一个分组捕获的内容
+//     //ary[2]->第二个分组捕获的内容
+//     console.log(str.match(reg));//和exec获取结果一样
+//     var reg=/zhu(\d+)/g;
+//     var str="zhu12345zhu1212zhu4545454";
+//     //用exec每次大小正则都能捕获到
+//     console.log(reg.exec(str));//["zhu12345", "12345", index: 0, input: "zhu12345zhu1212zhu4545454", groups: undefined]
+//     console.log(reg.exec(str));// ["zhu1212", "1212", index: 8, input: "zhu12345zhu1212zhu4545454", groups: undefined]
+//     console.log(reg.exec(str));// ["zhu4545454", "4545454", index: 15, input: "zhu12345zhu1212zhu4545454", groups: undefined]
+//     //match只有大正则的捕获内容
+//     console.log(str.match(reg));// ["zhu12345", "zhu1212", "zhu4545454"] 只有大正则的捕获内容
+</script>
+</body>
+</html>

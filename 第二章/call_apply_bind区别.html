@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // "user strict";//告诉当前浏览器接下来的JS代码将按照严格模式进行编写
+    var obj={name:"zhuxp"};
+    function fn(num1,num2,num3) {
+        console.log(num1+num2+num3);
+        console.log(this);
+    }
+    // fn.call(10,20);//this->10   console.log(num1+num2);->NaN
+    // fn.call(obj,10,20);//this->obj console.log(num1+num2);->30
+    // fn.call();//this->window   console.log(num1+num2);NaN  在严格模式下this->undefined
+    // fn.call(null)//this->window  在严格模式下this->null
+    // fn.call(undefined)//this->window 在严格模式下this->undefined
+// apply 和call方法作用一模一样，区别是传入的参数是数组 在严格模式和非严格模式下this指向规律也是一样的
+    //fn.apply(obj,[200,300]);//call传递参数是一个个传递值的apply是把要传的参数同一放在一个数组中进行操作
+    //bind:这个方法在ie6-8不兼容
+    //fn.call(obj,10,20);//->改变this和执行fn一起完成
+    var tempFn=fn.bind(obj,10);//->只是改变了fn中的this为obj，并且给fn传递两个参数值10,20，但此时并没有把fn这个函数执行
+    //执行bind会有一个返回值,就是我们把fn的this改变后的那个结果
+    //预处理思想:事先把fn的this改变为我们想要的结果,以后要用到直接执行即可
+    tempFn(20,30);//
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // function Fn() {
+    //     this.x=100;
+    // }
+    // Fn.prototype.getX=function () {
+    //     console.log(this.x);
+    // }
+    // var f=new Fn;
+    // f.getX();//this->f->100
+    // f.__proto__.getX();//undefined
+    //Function->函数类   所有的函数都是它的一个实例
+    //函数本身也会有一些自己的属性
+    //->length:0;形参的个数
+    //name:'Fn'函数名
+    //->prototype:类的原型,在原型上定义的方法都是当前Fn这个类的实例的公有方法
+    //-__proto__把一个函数当做一个普通对象，指向Function这个类的原型
+    //函数在整个JS中是最复杂也是最重要的知识:
+    //1.一个函数存在多面性:
+    //->"普通函数":它本身就是一个普通函数,执行的时候形成私有作用域(闭包)形参赋值 预解释，代码执行，执行完成后栈内存销毁或不销毁
+    //->"类":它有自己的实例，也有一个叫做prototype的属性是自己的原型，它的实例都指向自己的原型
+    //->"普通对象":和var obj={};一样就是一个普通对象也有自己的私有属性，也可以通过__proto__找到Function.prototype
+    //这三者之间没有必然的关系
+
+    function Fn() {
+       var num=500;
+        this.x=100;
+    }
+    Fn.prototype.getX=function () {
+        console.log(this.x);
+    }
+    Fn.aaa=1000;
+    var f=new Fn;
+    console.log(f);
+    f.num;//undefined
+    f.aaa//undefined
+    var res=Fn();//undefined //this->window
+    console.log(res);
+    Fn.aaa;//1000;
+    //万物皆对象
+    //Function.prototype是函数数据类型的值，但是相关操作和之前的一模一样//ƒ anonymous()
+
+</script>
+</body>
+</html>

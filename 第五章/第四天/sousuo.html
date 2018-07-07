@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            height: 100%;
+            overflow: hidden;
+        }
+        *{
+            margin: 0;
+            padding: 0;
+            text-decoration: none;
+            list-style: none;
+        }
+        img{
+            display: block;
+            width: 270px;
+            height: 129px;
+            margin: 80px auto 30px;
+            background: #3b5998;
+        }
+        div{
+            width: 640px;
+            height: 40px;
+            line-height: 40px;
+            margin: 0 auto;
+            position: relative;
+        }
+        div input{
+            float: left;
+            width: 528px;
+            height: 28px;
+            border: 1px solid #ccc;
+            padding: 5px;
+            font-size: 18px;
+        }
+        div span{
+            width: 100px;
+            height: 100%;
+            float: left;
+            background: #3385ff;
+            color:#fff;
+            text-align: center;
+        }
+        div ul{
+            width: 638px;
+            position: absolute;
+            left: 0;
+            top: 39px;
+            border: 1px solid #ccc;
+            box-shadow: 0 4px 5px #ccc;
+            display: none;
+        }
+        div ul li{
+            height: 30px;
+            line-height: 30px;
+        }
+        div ul li a{
+            padding-left: 10px;
+            height: 30px;
+            line-height: 30px;
+            display: block;
+        }
+        div ul li a:hover{
+            background: #ccc;
+        }
+    </style>
+</head>
+<body>
+<img src="./img/bd.png" alt="">
+<div id="box">
+    <input type="text">
+    <span>百度一下</span>
+    <ul>
+        <li><a href="javascript:;">学习JS?</a></li>
+        <li><a href="javascript:;">学习NODE?</a></li>
+        <li><a href="javascript:;">学习REACT?</a></li>
+        <li><a href="javascript:;">学习WEBPACK?</a></li>
+    </ul>
+</div>
+<script>
+    /**
+     * 1.编辑内容的时候有内容显示,否则隐藏
+     * 2.当输入框有内容聚焦就显示 没内容就隐藏
+     * 3. 点击下拉单中的内容ul隐藏 同时开始搜索
+     * 4. 点击 除了搜索框和下拉框以外的任何地方都隐藏
+     * 5. 按键盘上下也可以切换,按下回车键开始搜索,点击百度一下也会搜索
+     *
+     *
+     */
+var $=document.querySelectorAll.bind(document);
+var oBox=$('#box')[0];
+var oTxt=oBox.getElementsByTagName('input')[0];
+var oBtn=oBox.getElementsByTagName('span')[0];
+var oUl=oBox.getElementsByTagName('ul')[0];
+var oA=oBox.getElementsByTagName('a');
+var n=-1;
+var oldValue='';
+    oTxt.onfocus=oTxt.onkeyup=function(){
+    if(this.value.length){
+        oUl.style.display='block';
+    }else{
+        oUl.style.display='none';
+    }
+}
+oTxt.onclick=function(e){
+    e=e||window.event;
+    e.stopPropagation?e.stopPropagation():e.cancelBubble=true
+}
+document.body.onclick=function (e) {//事件委托
+    e=e||window.event;
+    var target=e.target||e.srcElement;
+    if(target.tagName.toLowerCase()==='a'){
+        oTxt.value=target.innerHTML;
+        search();
+    }
+    if(target==oBtn){
+        search();
+    }
+    if(target!==oTxt ||target!==oBtn){
+        oUl.style.display='none';
+    }
+}
+oTxt.onkeydown=function (e) {
+    e=e||window.event;
+    //left 37 top 38 right 39 bottom 40
+    if(e.keyCode===40){
+        n++;
+        if(n>=oA.length){
+            n=-1;
+        }
+        list();
+    }else if(e.keyCode===38){
+        n--;
+        if(n<=-2){
+            n=oA.length-1;
+        }
+        list();
+    }else if(e.keyCode===13){
+
+        if(n==-1){
+            search();
+        }else{
+            oTxt.value=oA[n].innerHTML;
+            search();
+        }
+
+    }
+}
+function list() {
+    if(!oldValue){
+        oldValue=oTxt.value;
+    }
+    for(var i=0;i<oA.length;i++){
+        oA[i].style.background='none';
+    }
+    if(n===-1){//展示最初输入的内容
+        oTxt.value=oldValue;
+    }else{
+        oA[n].style.background='#ccc';
+        oTxt.value=oA[n].innerHTML;
+    }
+}
+function search() {
+    window.open('https://www.baidu.com/s?wd='+oTxt.value);
+    oTxt.value='';
+}
+</script>
+</body>
+</html>

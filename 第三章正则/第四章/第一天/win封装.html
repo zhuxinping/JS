@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body style="height: 2000px;">
+<script>
+    //获取:
+   // document.documentElement.clientWidth||document.body.clientWidth;
+   // document.documentElement.scrollTop||document.body.scrollTop;
+
+    //设置:
+    // document.documentElement.scrollTop=document.body.scrollTop;
+    //需求:封装一个win方法:win方法:win方法有两个功能1)获取 2）设置
+/**
+ * 参数:获取的时候，参数1:属性名;  设置的时候:参1:属性名，参2:属性值 (有一个参数是获取两个参数是设置)
+ *  返回值:获取的时候需要返回值; 设置的时候不需要返回值.
+ *
+ * */
+// function win(attr,value) {
+//     //第二个参数没传的时候是获取:
+//     if(typeof value==='undefined'){
+//         return document.documentElement[attr]||document.body[attr];
+//     }
+//     //没有走，说明第二个参数传了:设置的
+//     document.documentElement[attr]=document.body[attr]=value;
+// }
+//     function win(attr,value) {
+//         //value==null->==会进行数据类型转换
+//         if( value===undefined){
+//         return document.documentElement[attr]||document.body[attr];
+//     }
+//     //没有走，说明第二个参数传了:设置的
+//     document.documentElement[attr]=document.body[attr]=value;
+//     }
+    //alert(win('clientWidth'));
+    // function win(attr,value) {
+    //     //value==null->==会进行数据类型转换
+    //     // undefined==null
+    //     // true
+    //     //arguments接收的是实参的个数跟形参无关
+    //     if(arguments.length==1){
+    //         return document.documentElement[attr]||document.body[attr];
+    //     }else if(arguments.length==2){
+    //         //没有走，说明第二个参数传了:设置的
+    //         document.documentElement[attr]=document.body[attr]=value;
+    //     }
+    // }
+    function aa(n1,n2,n3,n4) {
+
+    }
+</script>
+</body>
+</html>

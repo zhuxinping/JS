@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        canvas{
+            border: 1px solid #000;
+        }
+    </style>
+</head>
+<body>
+<canvas width="800" height="500" id="canvas"></canvas>
+<script>
+    var canvas=document.getElementById('canvas');//id获取元素
+    //上下文 创建一个2D环境 以后所有的操作都依赖ctx这个对象
+    var ctx=canvas.getContext('2d');
+    var img=new Image();
+        img.src='./img/1.png';
+    //1.给页面引入图片
+    function Man(x,y) {
+        this.x=x||50;
+        this.y=y||50;
+        this.state=0;
+    }
+    Man.prototype={
+        constructor:Man,
+        update:function(){
+            this.state=++this.state%4;
+            this.x+=10;
+        },
+        render:function () {
+            var _this=this;
+
+            ctx.beginPath();
+            //1.加载图片
+                // _this.imgageWidth=img.width;
+                // _this.imgageHeight=img.width;
+                // _this.manWidth=_this.imgageWidth/4;
+                // _this.manHeight=_this.imgageHeight/4;
+                //console.log( _this.manWidth);
+                 ctx.drawImage(img,_this.state*80,98*2,80,98,_this.x,_this.y,80,98);
+
+        }
+    }
+    var m=new Man();
+    setInterval(function () {
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        m.update();
+        m.render();
+    },60)
+</script>
+</body>
+</html>

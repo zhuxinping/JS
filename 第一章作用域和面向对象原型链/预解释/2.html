@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //基本数据类型操作值
+    //number string boolean null undefined
+    //引用数据类型操作的是引用地址
+    //object:{}[] /^$/ Date
+    //function
+    //console.log(num);//->undefiend  提前在栈空间声明了一个num变量 但是在这里还没定义赋值
+    var num=12;
+    var obj={name:'bule',age:18};
+    //console.log(num);//->12
+  fn(100,200);//因为在预解释函数声明定义已经完成了->300
+    function fn(num1,num2) {
+        //这里面预解释的时候只是一个字符串
+        console.log(total);//undefined
+        var total=num1+num2;
+        //console.log(total);
+        return total;
+    }
+    console.log(total);
+    // console.log(num);
+    // console.log(fn);//把整个函数定义的部分在控制台输出
+    // console.log(fn());//函数执行的返回结果在控制台输出（return后面写的是啥返回的就是啥如果没有return默认返回undefined）
+    //1.当浏览器加载HTML页面的时候,首先会提供一个供全局JS代码执行的环境->全局作用域(global/window)
+    //2.预解释
+    //在当前的作用域中,JS代码执行之前浏览器首先会默认的把所有带var和function的进行提前声明或者定义
+    //1)理解声明和定义
+    //var num =12;
+    //声明(declare):var num; 告诉浏览器在全局作用域中有一个num的变量了，如果一个变量只是声明了但是没有赋值默认值是undefined未定义
+    //定义(defined):num=12;->给我们的变量进行赋值
+    //2)对于带var和带function关键字的预解释的时候操作还是不一样的
+    //var ->在预解释 只是提前声明
+    //function->在预解释 的时候提前声明+定义都完成了
+    //3)预解释只发生在当前作用域当中，例如开始只对windown下的进行预解释，只有函数执行的时候才会对函数中的进行预解释
+    //3 JS中内存的分类
+    //栈内存:用来提供一个供JS代码执行的环境->我们栈内存就是作用域(全局作用域和私有作用域)
+    //堆内存:用来存储引用数据类型的值->对象存储的是属性名和属性值  函数存储的是代码字符串
+
+</script>
+</body>
+</html>

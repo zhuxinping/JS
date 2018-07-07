@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 600px;
+            height: 300px;
+            margin: 30px auto;
+        }
+        .box input{
+            width: 200px;
+            height: 40px;
+            float: left;
+        }
+        .box input.on{
+            background: lightblue;
+        }
+        .box div{
+            width: 100%;
+            height: 100%;
+            background: #f90;
+            display: none;
+        }
+        .box div.show{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="box" id="box">
+    <input type="button" value="按钮1" class="on">
+    <input type="button" value="按钮2">
+    <input type="button" value="按钮3">
+    <div class="show" >内容1</div>
+    <div>内容2</div>
+    <div>内容3</div>
+</div>
+<div class="box" id="box1">
+    <input type="button" value="按钮1" class="on">
+    <input type="button" value="按钮2">
+    <input type="button" value="按钮3">
+    <div class="show" >内容1</div>
+    <div>内容2</div>
+    <div>内容3</div>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/extend1.js"></script>
+<script>
+        // $('#box').tab();//给原型扩充的方法用实例调用
+        // $('#box1').tab();//给原型扩充的方法用实例调用
+    $.tab('#box');
+    $.tab('#box1');
+</script>
+</html>

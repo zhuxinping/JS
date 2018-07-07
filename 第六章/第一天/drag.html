@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            background: red;
+        }
+        /*#div img{*/
+            /*width: 100%;*/
+            /*height: 100%;*/
+            /*background: #3b5998;*/
+        /*}*/
+    </style>
+</head>
+<body>
+<div id="div">
+    <!--<img src="bd.png" alt="">-->
+</div>
+<script src="js/utils.js"></script>
+<script src="js/event2.js"></script>
+<script src="js/drag2.js"></script>
+<script>
+   //提前订阅跟self事件有关的方法
+
+    event.on(oDiv,'selfDown',clearEffect);
+    event.on(oDiv,'selfMove',getSpeedX);
+    event.on(oDiv,'selfUp',fly);
+    event.on(oDiv,'selfUp',drop);
+    function clearEffect() {
+        clearTimeout(this.flyTimer);
+        clearTimeout(this.dropTimer);
+    }
+   function getSpeedX(e) {
+      // console.log(e);
+       if(!this.prev){
+           this.prev=e.pageX;
+       }else{
+           this.speedX=e.pageX-this.prev;
+           this.prev=e.pageX;
+       }
+   }
+   function fly(){
+       clearTimeout(this.flyTimer);
+       this.speedX*=0.93;
+       var l=this.offsetLeft+this.speedX;
+       var maxL=utils.win('clientWidth')-this.offsetWidth;
+       if(l>=maxL){
+           l=maxL;
+           this.speedX*=-1;
+       }else if(l<=0){
+           l=0;
+           this.speedX*=-1;
+       }
+      if(Math.abs(this.speedX)>=0.5){
+          this.style.left=l+'px';
+          this.flyTimer=setTimeout(event.processThis(fly,this),10)
+      }
+   }
+   function drop() {
+        clearTimeout(this.dropTimer);
+        if(!this.speedY){
+            this.speedY=9.8
+        }else{
+            this.speedY+=9.8;
+        }
+        var t=this.offsetTop+this.speedY;
+        this.speedY*=0.93;
+        var maxT=utils.win('clientHeight')-this.offsetHeight;
+        if(t>=maxT){
+            t=maxT;
+            this.speedY*=-1;
+            this.tmp++;
+        }else{
+            this.tmp=0;
+        }
+        if(this.tmp<2){
+            this.style.top=t+'px';
+            this.dropTimer=setTimeout(event.processThis(drop,this),10);
+       }
+   }
+</script>
+</body>
+</html>

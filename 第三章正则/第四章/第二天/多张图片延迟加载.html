@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        p{
+            width: 90px;
+            height: 90px;
+            background: url("img/taobao.png") no-repeat center #ccc;
+        }
+        p img{
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+<div style="height: 1000px;"></div>
+<p><img realImg="./img/zf_course1.png" src="" alt=""></p>
+<p><img realImg="./img/zf_course2.png" src="" alt=""></p>
+<p><img realImg="./img/zf_course3.png" src="" alt=""></p>
+<p><img realImg="./img/zf_course4.png" src="" alt=""></p>
+<p><img realImg="./img/zf_course5.png" src="" alt=""></p>
+</body>
+<script src="js/utils.js"></script>
+<script>
+var oP=document.getElementsByTagName('p');
+var oImg=document.getElementsByTagName('img');
+window.onscroll=function () {
+    //校验每张图片 是否满足加载的条件
+    var scrollBottom=utils.win('scrollTop')+utils.win('clientHeight');
+    for(var i=0;i<oImg.length;i++){
+        var curPos=utils.offset(oImg[i]).top+utils.getCss(oImg[i],'height');
+        if(curPos<=scrollBottom){
+            lazyImg(oImg[i]);//把本身图片传递过去
+        }
+    }
+}
+function lazyImg(img) {
+    if(img.loaded) return;
+    //1.创建临时图片标签
+    var tmpImg=new Image();
+    tmpImg.src=img.getAttribute('realImg');
+    tmpImg.onload=function () {
+        img.src=this.src;
+        tmpImg=null;
+        img.loaded=true;
+    }
+    tmpImg.onerror=function () {
+        img.loaded=true;
+        img.parentNode.style.background='url("./img/err.png") no-repeat center #cccccc';
+        tmpImg=null;
+    }
+}
+</script>
+</html>

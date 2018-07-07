@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div{
+            position: absolute;
+            left: 300px;
+            top: 0;
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        #target{
+            position: absolute;
+            left: 1200px;
+            top: 0;
+            width: 1px;
+            height: 300px;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+<div id="div"></div>
+<div id="target"></div>
+<script src="js/utils.js"></script>
+<script src="js/move3.js"></script>
+<script>
+    // 让left:1200;让top:400;
+    /**
+     * t:time走了多久---不断累加的值
+     * b:begin;起始位置
+     * c:chagne;还有多少路程要走  change=target-begin;
+     * d:duration;总时间  duration=1000;
+     * */
+        // function Linear(t,b,c,d) {//求出任何时间点的新位置
+        //        return t*c/d+b;
+        // }
+    var oDiv=document.getElementById('div');
+    // oDiv.onclick=function () {
+    //     animate(oDiv,{
+    //         left:1200,
+    //         top:600
+    //     },["Bounce","easeIn"],function () {
+    //         this.style.background='#f90';
+    //     });
+    // }
+    animate({
+    id:oDiv,
+        target:{
+        left:1200,top:400
+        },
+        effect:0,//如果没有默认是匀速
+        callback:function () {//传了就调用，不传不管
+            this.style.background='green';
+        },
+        duration:1000//默认总时间是700，也可以自定义
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //如何查找当前作用域的上一级作用域  主要看是在哪定义的
+    //看当前函数是在哪个作用域下定义的那么他的上级作用域就是谁,和函数在哪执行没有任何的关系,只和它在哪定义的有关系
+   //  var num=12
+   //  function fn() {
+   //     var num=120;
+   //     return function () {//这个小function是在fn这个私有作用域下定义的所以他的上级作用域就是fn的私有作用域
+   //         console.log(num);
+   //     };
+   //  }
+   // var f=fn();
+   //  f();//120
+   //  ~function () {
+   //      var num=1200;
+   //      f();//120
+   //  }();
+   //  console.log(num);
+
+    var num=120;
+    function fn() {//fn的上级作用域是window
+         //num=120;//继续向上级作用域查找
+       num++;//当累加的时候当前这个作用域的num还是重新赋值是120的基础上再累加
+        return function () {//这个小function是在fn这个私有作用域下定义的所以他的上级作用域就是fn的私有作用域
+            console.log(num);
+            console.log(this);//window
+        };//这里返回的是一个引用地址会自己开辟一个私有作用域
+    }
+    var f=fn();//这里是一个引用地址
+    f();//121
+    f();//121
+    ~function () {
+        var num=1200;
+        f();//121
+    }();
+    console.log(num);//121外部的变量被修改了
+</script>
+</body>
+</html>

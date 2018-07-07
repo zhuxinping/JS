@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        html,body{
+            height: 100%;
+            overflow: hidden;
+        }
+        span{
+            width: 200px;
+            height: 40px;
+            position: relative;
+            margin: 100px auto;
+            background: darkgrey;
+            display: block;
+            text-align: center;
+            line-height: 40px;
+        }
+        span div{
+            width: 400px;
+            height: 200px;
+            line-height: 200px;
+            text-align: center;
+            background: #e1e1e1;
+            position: absolute;
+            left: 0;
+            top: 40px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<span>
+    购物车
+    <!--<div style="display: none;">购物车还没有商品,赶紧选购</div>-->
+    <div>购物车还没有商品,赶紧选购</div>
+</span>
+</body>
+<script>
+    var oS=document.getElementsByTagName('span')[0];
+    var oD=document.getElementsByTagName('div')[0];
+    // oS.onmouseover=function (e) {
+    //     e=e||window.event;
+    //     var oTo=e.fromElement||e.relatedTarget;
+    //     if(this.contains(oTo)) return;
+    //     oD.style.display='block';
+    //     console.log('ok');
+    // }
+    // oS.onmouseout=function (e) {
+    //     e=e||window.event;
+    //     var oTo=e.toElement||e.relatedTarget;
+    //     if(this.contains(oTo)) return;
+    //     oD.style.display='none';
+    // }
+    // oS.onmouseenter=function () {
+    //     oD.style.display='block';
+    //     console.log('ok');
+    // }
+    // oS.onmouseleave=function () {
+    //     oD.style.display='none';
+    // }
+    //点击oS,oD显示  再次点击oS,oD消失  点击页面任何地方oD都消失 但是点击oD自己不消失
+    //事件委托
+    document.body.onclick=function (e) {
+        e||window.event;
+        var target=e.target||e.srcElement;
+        // if(target.tagName.toLowerCase()==='span'){
+        //     //console.log(oD.style.display);//要在行内设置才行
+        //     if(oD.style.display==='block'){
+        //         oD.style.display='none';
+        //     }else{
+        //         oD.style.display='block';
+        //     }
+        // }
+        // if(target.tagName.toLowerCase()!=='div' && target.tagName.toLowerCase()!=='span'){
+        //     oD.style.display='none';
+        // }
+        if(target===oS){
+            //console.log(oD.style.display);//要在行内设置才行
+            if(oD.style.display==='block'){
+                oD.style.display='none';
+            }else{
+                oD.style.display='block';
+            }
+        }
+        if(target!==oD && target!==oS){
+            oD.style.display='none';
+        }
+    }
+</script>
+</html>

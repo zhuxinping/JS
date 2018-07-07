@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+<body style="height: 3000px">
+<div id="div"></div>
+<script src="js/wheel.js"></script>
+<script>
+    /**
+     * addWheel(ele,cb);回调函数中接收一个参数
+     *
+     *
+     *
+     *
+     * */
+    var oDiv=document.getElementById('div');
+    wheel(oDiv,function (bOK) {
+        if(bOK){
+                this.style.height=this.offsetHeight+10+'px';
+        }else{
+            this.style.height=this.offsetHeight-10+'px';
+        }
+    });
+</script>
+</body>
+</html>

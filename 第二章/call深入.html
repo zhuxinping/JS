@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+//     Array.prototype.constructor
+//     所有的数组实例都继承了这个属性，它的值就是 Array，表明了所有的数组都是由 Array 构造出来的。
+// Array.prototype.length
+//     上面说了，因为 Array.prototype 也是个数组，所以它也有 length 属性，这个值为 0，因为它是个空数组。
+    //给数组原型添加一个返回数组第一个元素的方法
+//     if(!Array.prototype.first){
+//         Array.prototype.first=function () {
+//             console.log(`如果JavaScript本身不提供 first() 方法，
+// 添加一个返回数组的第一个元素的新方法。`);
+//             return this[0];
+//         }
+//     }
+//     var ary=[12,12,5,4,5];
+//     let res=ary.first();
+//     console.log(res);
+    //Array.prototype.slice=function(){};
+// var ary=[12,12,5,4,5];
+    //ary.slice  ->ary这个实例通过原型链的查找机制找到Array.prototype.slice方法
+    //ary.slice();让找到的slice方法执行,在执行slice方法过程中，才把ary数组进行了截取
+    //Function.prototype.call=function(){}
+//
+var obj={name:"zhuxp"}
+//     function fn() {
+//         console.log(this);
+//     }
+//     fn();//this=>window
+//     fn.call(obj);//this->obj //call作用就是这个方法中的this改变成传入的obj
+    //obj.fn();//->undefined();->obj.fn is not a function
+    //call方法的作用:
+    //->首先我们让原型上的call方法执行，执行call方法的时候,我们让fn方法中的this变成第一个参数值obj，然后再把fn这个函数执行
+// Function.prototype.myCall=function(context){
+//     //myCall方法中的this就是当前我要操作和改变其this关键的那个函数
+//     //1.->让fn中this关键字变成context的值->obj
+//         //让this这个函数中的"this"关键字变为context
+//     var context=context||window;
+//         context.fn=this;//相当于把函数设置成obj的一个方法fn
+//     //传递参数进来
+//     var args = [];
+//     for(var i = 1, len = arguments.length; i < len; i++) {
+//         args.push('arguments[' + i + ']');
+//     }
+//     //2.让fn方法再执行
+//        // context.fn(args.join(','));
+//    var res= eval('context.fn(' + args +')');
+//         delete context.fn;
+//         args=null;
+//         return res;
+// }
+// // fn.myCall(obj);//this->fn
+// function sum() {
+//     console.log(this);
+// }
+// sum.myCall(obj);//this->sum
+
+
+// Function.prototype.myApply = function (context, arr) {
+//     var context = Object(context) || window;
+//     context.fn = this;
+//
+//     var result;
+//     if (!arr) {
+//         result = context.fn();
+//     }
+//     else {
+//         var args = [];
+//         for (var i = 0, len = arr.length; i < len; i++) {
+//             args.push('arr[' + i + ']');
+//         }
+//         result = eval('context.fn(' + args + ')')
+//     }
+//
+//     delete context.fn
+//     return result;
+// }
+// 我们可以首先得出 bind 函数的两个特点：
+//
+// 返回一个函数
+// 可以传入参数
+</script>
+</body>
+</html>

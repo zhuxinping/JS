@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+#div{
+    width: 200px;
+    height: 200px;
+    background: red;
+}
+    </style>
+    <script src="../../../JavaScript201708-master/WEEK6/20170831正式课第三天/eventAnimate.js"></script>
+</head>
+<body>
+<div id="div"></div>
+</body>
+<!--<script src="js/jquery-1.11.3.min.js"></script>-->
+<script>
+    // $(document).ready(function () {
+    //
+    // });
+    domReady(function () {
+       alert(123);
+    });
+function domReady(fn) {
+    if(document.addEventListener){
+        document.addEventListener('DOMContentLoaded',fn);//异步操作，当DOMContentLoaded触发才执行fn
+    }else{
+        document.onreadystatechange=function () {
+            if(document.readyState==='complete'){
+                fn();
+            }
+        }
+    }
+    
+}
+</script>
+
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+        input{
+            width: 200px;
+            height: 40px;
+        }
+    </style>
+</head>
+<body>
+<div id="div"></div>
+<input id="in" type="text">
+</body>
+<script>
+    var oDiv=document.getElementById('div');
+    // var oIput=document.getElementById('in');
+    // oDiv.onclick=function (e) {
+    //     //在标准浏览器，通过形参接收e;在IE浏览器下,事件对象跟参数无关,通过window.event获取事件对象
+    //     var e=e||window.event;
+    //     // console.log(e);//事件对象
+    //     // console.log(e.type);//事件对象
+    //     //console.dir( oDiv.onclick);
+    // //     e.pageX=(document.documentElement.scrollLeft||document.body.scrollLeft)+e.clientX;
+    // //     e.pageY=(document.documentElement.scrollTop||document.body.scrollTop)+e.clientY;
+    // // console.log(e.pageX);
+    // // console.log(e.pageY);
+    //
+    // }
+    // oIput.onkeydown=function (e) {
+    //     //在标准浏览器，通过形参接收e;在IE浏览器下,事件对象跟参数无关,通过window.event获取事件对象
+    //     var e=e||window.event;
+    //     // console.log(e);//事件对象
+    //     // console.log(e.type);//事件对象
+    //     //console.dir( oDiv.onclick);
+    //     //     e.pageX=(document.documentElement.scrollLeft||document.body.scrollLeft)+e.clientX;
+    //     //     e.pageY=(document.documentElement.scrollTop||document.body.scrollTop)+e.clientY;
+    //     // console.log(e.pageX);
+    //     // console.log(e.pageY);
+    //     console.log(e.keyCode);
+    //
+    // }
+    //下面这两个function(){}地址不同 所以是不同的
+    // oDiv.addEventListener('click',function () {
+    //         console.log(1);
+    // },false);//false不捕获
+    // oDiv.removeEventListener('click',function () {
+    //
+    // },false)
+    // //解除绑定事件
+    // function fn1(){
+    //     alert(1)
+    // }
+    // oDiv.addEventListener('click',fn1,false);//false不捕获
+    // oDiv.removeEventListener('click',fn1,false);//此时点击无效果
+
+oDiv.oncontextmenu=function (e) {
+    e=e||window.event;
+    //e.preventDefault();
+   // e.returnValue=false;
+   // console.log(e.preventDefault);
+    e.preventDefault?e.preventDefault():e.returnValue=false;
+   // return false;
+}
+
+</script>
+</html>

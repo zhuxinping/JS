@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //1.所有的函数数据类型(普通函数,类)都天生自带一个属性:prototype,它存储的值是一个兑现数据类型的值浏览器默认为其开辟一个堆内存
+    //2.在浏览器给prototype默认开辟的这个堆内存上有一个默认的属性:constructor指向当前类本身
+    //3.每一个对象数据类型(普通的对象 数组 第三章正则 实例prototype 函数)都天生自带一个属性:___proto__指向当前实例所属类的原型
+    // function Fn() {
+    //     this.x=100;
+    //     this.y=200;
+    // }
+    // Fn.prototype.getX=function () {
+    //     this.x=300;
+    //     this.y=400;
+    //     console.log(this.x);
+    // }
+    // Fn.prototype.getY=function () {
+    //     console.log(this.y);
+    // }
+    // var f1=new Fn;
+    // f1.getX();//300  //this->f1这个实例相当于把  Fn.prototype.getX中的this.x=300->f1.x=300
+    // f1.getY();//400 //this->f1这个实例相当于把  Fn.prototype.getY this.y=400->f1.y=400;
+   // Fn.prototype.getX();//300
+   // Fn.prototype.getY();//400
+
+
+    // function Fn() {
+    //     this.x=100;
+    //     this.y=200;
+    // }
+    // Fn.prototype.getX=function () {
+    //     console.log(this.x);
+    // }
+    // Fn.prototype.getY=function () {
+    //     console.log(this.y);
+    // }
+    // var f1=new Fn;
+    // f1.getX();//100  //this->f1这个实例相当于把  Fn.prototype.getX中的this.x=100->f1.x=100
+    // f1.getY();//200  //this->f1这个实例相当于把  Fn.prototype.getY中的this.y=100->f1.y=200
+    // function Fn() {
+    //     this.x=100;
+    //     this.getX=function () {
+    //         console.log(this.x);
+    //     }
+    // }
+    // Fn.prototype.getX=function () {
+    //     console.log(this.x);
+    // }
+    //
+    // var f1=new Fn;
+    // f1.getX();//先找私有的->100
+    // f1.__proto__.getX();//undefined
+
+
+    function Fn() {
+        this.x=100;
+        this.getX=function () {
+            console.log(this.x);
+        }
+    }
+    Fn.prototype.getX=function () {
+        console.log(this.x);
+    }
+    Fn.prototype.setX=function (n) {
+        this.x=n;
+    }
+var f1=new Fn;
+    f1.getX();//this->f1-> console.log(f.x); ->100
+    f1.__proto__.getX();//undefind
+    Fn.prototype.setX(300);//->this->Fn.prototype  ->Fn.prototype.x=300
+    f1.getX();//100
+    f1.__proto__.getX();//->300
+    f1.setX(500);//f1.x=500;  把私有的修改为500
+    f1.getX();//500
+    f1.y=300;//给f1本身增加一个私有的属性和f2无关系
+    f1.__proto__.y=1000;//在原型上增加一个y=1000; 会影响f2的原型
+
+
+</script>
+</body>
+</html>

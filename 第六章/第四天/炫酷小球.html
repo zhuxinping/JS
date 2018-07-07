@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html,body{
+            height: 100%;
+            overflow: hidden;
+        }
+        canvas{
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<canvas width="1280" height="800" id="canvas">sorry,您的浏览器不支持!</canvas>
+<script src="js/utils.js"></script>
+<script>
+    var canvas=document.getElementById('canvas');
+    var ctx=canvas.getContext('2d');
+    var ary=[];
+    var W=utils.win('clientWidth');
+    var H=utils.win('clientHeight');
+    canvas.width=W;
+    canvas.height=H;
+    //创建一个小球类 arc(x,y,r,start,end,boolean);
+    function Ball(x,y,r,color) {
+        this.x=x;
+        this.y=y;
+        this.r=r||30;
+        this.color='rgb('+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+','+Math.round(Math.random()*255)+')';
+        //改变运动方向
+        this.dx=Math.random()*10-5;//-5-5
+        this.dy=Math.random()*10-5;//-5-5
+        this.dr=Math.random()+0.3;
+        ary.push(this);//把每个实例都放进数组中
+    }
+    Ball.prototype={
+        constructor:Ball,
+        update:function(){//更新状态
+            //x,y控制物体运动的方向
+            this.x+=this.dx;
+            this.y+=this.dy;
+            this.r-=this.dr;
+            //删除半径消失的小球
+            if(this.r<0){
+                for(var i=0;i<ary.length;i++){
+                    if(ary[i]===this){
+                        ary.splice(i,1);
+                    }
+                }
+            }
+            return this;
+        },
+        render:function () {//渲染小球图形的
+            ctx.beginPath();//设置起始路径
+            ctx.arc(this.x,this.y,this.r,0,Math.PI*2,true);
+            ctx.fillStyle=this.color;
+            ctx.fill();
+            return this;
+        }
+    }
+        //new Ball(100,100);
+        // new Ball(400,300);
+        // new Ball(400,300);
+        // new Ball(400,300);
+        // new Ball(400,300);
+        // new Ball(400,300);
+        // new Ball(500,300);
+        // new Ball(400,300);
+        // new Ball(400,300);
+        // new Ball(400,300);
+       // console.log(ary);
+    setInterval(function () {
+        //每次重新渲染前要清除画布
+        ctx.clearRect(0,0,canvas.width,canvas.height);
+        for(var i=0 ;i<ary.length;i++){
+            ary[i].update();
+            if(ary[i]){//当ary[i]为假的时候说明ary[i]实例已经被删除了
+                ary[i].render();
+            }
+        }
+    },20);//一秒钟走了多少帧  20帧
+    canvas.addEventListener('mousemove',function (e) {
+        new Ball(e.clientX,e.clientY);
+    });
+</script>
+</body>
+</html>

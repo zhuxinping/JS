@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        div{
+            padding: 100px;
+            border:10px solid #000;
+        }
+        #div1{
+            width: 600px;
+            height: 400px;
+            background: red;
+        }
+        #div2{
+            width: 400px;
+            height: 300px;
+            background: green;
+            position: relative;
+        }
+        #div3{
+            width: 200px;
+            height: 100px;
+            background: blue;
+            position: absolute;
+            left: 200px;
+            top: 300px;
+        }
+    </style>
+</head>
+<body>
+<div id="div1">
+    <div id="div2">
+        <div id="div3"></div>
+    </div>
+</div>
+</body>
+</html>

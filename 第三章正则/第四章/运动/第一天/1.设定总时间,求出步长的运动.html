@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div{
+            width: 200px;
+            height: 200px;
+            background: red;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #target{
+            position: absolute;
+            left: 1000px;
+            top: 0;
+            width: 1px;
+            height: 300px;
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+<div id="div"></div>
+<div id="target"></div>
+
+<script>
+    var oDiv=document.getElementById('div');
+    /**
+     * 在1000ms内,运动到1000px的位置
+     * target:1000;
+     * duration:1000;
+     * interval:10;
+     * step=target/duration*interval;
+     *
+     * 每次在最新的距离上,+=step;然后再设置最新的left值
+     *
+     * */
+    oDiv.onclick=function () {
+    var target=1000;
+    var duration=3773.333;
+    var interval=10;
+    var step=target/duration*interval;
+    var timer=setInterval(function () {
+        var  curLeft=oDiv.offsetLeft;
+        console.log(step);
+        if(curLeft+step>=target){//当预估再多走一步超过目标值的时候,我们让物体直接到达终点
+            oDiv.style.left=target+'px';
+            clearInterval(timer);
+            return;
+        }
+        curLeft+=step;
+        oDiv.style.left=curLeft+'px';
+    },interval)
+    }
+</script>
+</body>
+</html>

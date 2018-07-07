@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            width: 200px;
+            height: 200px;
+            background: red;
+            opacity: 0.1;
+            filter: alpha(opacity=10);
+        }
+    </style>
+</head>
+<body>
+<div id="div">
+
+</div>
+<script>
+    window.onload=function () {
+        var oDiv=document.getElementById('div');//
+        //getCss:获取当前元素的某个单一的样式值
+        function getCss(curEle,attr) {
+            var val=null;
+            var reg=null;
+            if('getComputedStyle' in window){
+                val =getComputedStyle(curEle,false)[attr];
+            }else{
+                if(attr==='opacity'){
+                    val=curEle.currentStyle['filter'];//正则校验// 'alpha(opacity=10)'  如果设置对就获取  不对默认就是透明度是1
+                    reg=/^alpha\(opacity[=:](\d+(\.\d+)?)\)$/;//不能加g
+                    //如果正则中加了全局g  test exec都会影响lastIndex
+                    // console.log(reg.test(val));
+                    // //console.log(val);
+                    // return reg.test(val)?reg.exec(val)[1]/100:1;
+                    // if(reg.test(val)){
+                    //     console.log(RegExp.$1);//拿到当前大正则的第一个小分组 RegExp.$2拿到当前大正则的第二个小分组  最大到RegExp.$9
+                    // }
+                    return reg.test(val)?RegExp.$1/100:1;
+                }else{
+                    val=curEle.currentStyle[attr];
+                }
+            }
+            //left top bottom right height width margin padding marginLeft ...
+             reg=/^(left|top|right|bottom|width|height|((margin|padding)(left|top|right|bottom)?))$/gi;
+            return reg.test(attr)?parseInt(val):val;
+        }
+      // console.log( getCss(oDiv,'opacity'));
+    }
+</script>
+</body>
+</html>

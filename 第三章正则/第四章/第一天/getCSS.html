@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+<div id="div1" style="height: 200px">
+
+</div>
+<script>
+    var oDiv=document.getElementById("div1");
+    //alert(oDiv.style.height)
+    // alert(getComputedStyle(oDiv,false)['height']);
+    // alert(oDiv.currentStyle['height']);
+    //需求:封装一个getCss();功能:获取当前元素的某个样式值
+    //alert(window.getComputedStyle);
+    //alert(typeof window.getComputedStyle=='function');
+    /**
+     * 1. 参数：元素 样式
+     * 2. 返回值 return 当前元素的某个样式值
+     *
+     * */
+    // function getCss(obj,attr) {
+    //     if('getComputedStyle' in window){
+    //         return getComputedStyle(obj,false)[attr];
+    //     }else{
+    //         return obj.currentStyle[attr];
+    //     }
+    // }
+    // function getCss(obj,attr) {
+    //     if(typeof window.getComputedStyle=='function'){
+    //         return getComputedStyle(obj,false)[attr];
+    //     }else{
+    //         return obj.currentStyle[attr];
+    //     }
+    // }
+   //  function getCss(obj,attr) {
+   //      try{
+   //          return getComputedStyle(obj,false)[attr];
+   //      }catch (e) {
+   //          return obj.currentStyle[attr];
+   //      }
+   //  }
+   // console.log(getCss(oDiv,'height'));//200px
+    //拿到浏览器的详细信息
+    //alert(typeof window.navigator.userAgent);
+    var reg=/MSIE (6|7|8)/g;//判断IE浏览器
+   // alert( window.navigator.userAgent.search(reg)!==-1);
+  // alert( window.navigator.userAgent.match(reg));
+    //alert(reg.test(window.navigator.userAgent));
+     function getCss(obj,attr) {
+         if(window.navigator.userAgent.match(reg)){
+             return obj.currentStyle[attr];
+         }else{
+             return getComputedStyle(obj,false)[attr];
+         }
+     }
+    console.log(getCss(oDiv,'height'));//200px
+</script>
+</body>
+</html>

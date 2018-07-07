@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+   //  function avgFn() {
+   //      //arguments.sort();//会报错因为argument是一个类数组集合不是数组不能直接使用数组的方法
+   // //1.将类数组转化数组
+   //      var ary=[];
+   //      for(var i=0;i<arguments.length;i++){
+   //          ary[ary.length]=arguments[i];
+   //      }
+   //      //console.log(ary);
+   //      //2.给数组排序去掉头尾
+   //      ary.sort(function (a,b) {
+   //          return a-b;
+   //      });
+   //      ary.shift();
+   //      ary.pop();
+   //      return (eval(ary.join("+"))/ary.length).toFixed(2);
+   //  }
+   //模拟slice实现数组克隆的功能
+// Array.prototype.mySlice=function () {
+//     //1.将类数组转换为数组:把arguments克隆一份放入到数组里面
+//     //this->ary
+//     var ary=[];
+//     for(var i=0;i<this.length;i++){
+//         ary[ary.length]=this[i];
+//     }
+//     //对比
+//     //1.将类数组转化数组所以只需要将this变为arguments即可
+//     // var ary=[];
+//     // for(var i=0;i<arguments.length;i++){
+//     //     ary[ary.length]=arguments[i];
+//     // }
+//     return ary;
+// };
+// var ary1=[1,2,3];
+// var newAry=ary1.mySlice();
+// var newAry1=ary1.slice();
+// console.log(newAry);
+// console.log(newAry1);
+   //优化
+   // function avgFn() {
+   //     //arguments.sort();//会报错因为argument是一个类数组集合不是数组不能直接使用数组的方法
+   //     //1.将类数组转化数组
+   //    //借用数组原型上的slice方法当slice执行的时候让方法中的this变为arguments,就可以实现将类数组转化数组
+   //     //var ary=Array.prototype.slice.call(arguments);//让slice中this变arguments并且执行slice();
+   //     var ary=[].slice.call(arguments);//让slice中this变arguments并且执行slice();
+   //     console.log(ary);
+   //     //2.给数组排序去掉头尾
+   //     ary.sort(function (a,b) {
+   //         return a-b;
+   //     });
+   //     ary.shift();
+   //     ary.pop();
+   //     return (eval(ary.join("+"))/ary.length).toFixed(2);
+   // }
+
+   function avgFn() {
+       //借用数组方法利用call更改this并且传入参数执行排序arguments可以借用数组的方法更改this前提需要是类数组才可以
+       Array.prototype.sort.call(arguments,function (a,b) {
+           return a-b;
+       });
+       [].shift.call(arguments);
+       [].pop.call(arguments);;
+       return (eval([].join.call(arguments,"+"))/arguments.length).toFixed(2);
+   }
+   let res= avgFn(9.8,9.7,70,9.9,9.0,9.8,3.0);
+    console.log(res);
+</script>
+</body>
+</html>

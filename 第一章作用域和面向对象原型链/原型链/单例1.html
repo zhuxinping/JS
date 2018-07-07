@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var createDiv = (function(){
+        var div;
+        return function(){
+            if(!div){
+                div = document.createElement('div');
+                div.style.width = '100px';
+                div.style.height = '100px';
+                div.style.background = 'red';
+                div.style.marginBottom = '10px';
+                document.body.appendChild(div);
+            }
+        }
+    })();
+    createDiv();
+    createDiv();
+    createDiv();
+    //只创建一个div
+</script>
+</body>
+</html>

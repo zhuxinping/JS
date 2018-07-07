@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>getByClass</title>
+</head>
+<body>
+<div id="box">
+    <div class="box1 box2 box3 box4">1</div>
+    <div class="box1 box2 box3 ">2</div>
+    <div class="box1 box2">3</div>
+    <div class="box1">4</div>
+</div>
+<script src="./js/utils.js"></script>
+<script>
+    var oBox=document.getElementById('box');
+    // var oBox2=oBox.getElementsByClassName('box2 box3');
+
+     //console.log(oBox2);
+     //getByClass:功能:通过class名获取一组元素
+     /**
+      * 参数:字符串(可以包含多个class名)
+      * 返回值:数组
+      *
+      * */
+    // alert(document.getElementsByClassName);
+    //  function getByClass(str,parent) {//在父 容器下
+    //      parent=parent||document;
+    //      var ary=[];
+    //       if('getComputedStyle' in window){//标准浏览器
+    //           ary=Array.prototype.slice.call(parent.getElementsByClassName(str));
+    //       }else{
+    //           //正则匹配
+    //           //1.把包含多个class名的字符串,切分成数组;[box2,box3]
+    //           var aryClass=str.replace(/(^ +)|( +$)/g,'').split(/\s+/g);//字符串
+    //           //验证父容器下所有元素的class名包含数组中的每一项
+    //             //1拿到父容器下所有的元素2验证每个元素的class名是否包含数组的每一项
+    //           //3把符合要求的元素放入数组ary
+    //           var nodeList=parent.getElementsByTagName('*');//*通配符 拿到父容器下所有元素的标签名
+    //           for(var i=0;i<nodeList.length;i++){
+    //               var cur=nodeList[i];
+    //               //假设法
+    //               var bOK=true;
+    //               for(var j=0;j<aryClass.length;j++){
+    //                   var reg=new RegExp('(^| +)'+aryClass[j]+'( +|$)','g');//两边可能是开头结尾和空格
+    //                   if(!reg.test(cur.className)){
+    //                       bOK=false;
+    //                   }
+    //               }
+    //               if(bOK){
+    //                   ary.push(cur);
+    //               }
+    //           }
+    //       }
+    //      return ary;
+    //  }
+
+     // var res=utils.getByClass('box1',oBox);
+     // console.log(res);
+     // for(var i=0;i<res.length;i++){
+     //     res[i].style.background='red';
+     // }
+    // // alert(utils.hasClass(res[0],'box5'))
+    // utils.addClass(res[0],'box2 box3 box5')
+   // var oDiv=oBox.children[0];
+   // utils.removeClass(oDiv,'box2 box4');
+   //  utils.setCss(oDiv,'width','200');
+   //  utils.setCss(oDiv,'background','red');
+   //  utils.setCss(oDiv,'opacity','0.1');
+   //  utils.setCss(oDiv,'float','right');
+   //  utils.setGroupCss(oDiv,{
+   //      width:100,
+   //      background:'#f90',
+   //      opacity:1,
+   //      float:'right'
+   //  })
+   // utils.css(oDiv,'background','green');
+   //  utils.css(oDiv,{height:100,background:'blue',opacity:0.5});
+   //   alert(utils.css(oDiv,'height'));
+</script>
+</body>
+</html>

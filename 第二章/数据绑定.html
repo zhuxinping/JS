@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        .bg{
+            width: 10px;
+            height: 10px;
+            background: red;
+            border-radius: 50%;
+        }
+        #ul1{
+            margin: 20px auto;
+            width: 1200px;
+        }
+        #ul1 li{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<ul id="ul1">
+    <li>
+        <span class="bg">01</span>反腐败斗争
+    </li>
+    <li>
+        <span class="bg">02</span>反腐败斗争
+    </li>
+    <li>
+        <span class="bg">03</span>反腐败斗争
+    </li>
+</ul>
+<script src="json-bind.js"></script>
+<script>
+   var  $=document.querySelectorAll.bind(document);//querySelectorAll方法里面的this绑定为document
+    window.onload=function () {
+        var oUl=$("#ul1")[0];
+        var oLis=oUl.getElementsByTagName("li");//HTMLCollection元素集合的一个实例
+        for (var i=0;i<oLis.length;i++){
+            oLis[i].onmouseover=function () {
+              this.style.backgroundColor="#f90";
+            };
+            oLis[i].onmouseout=function () {
+                this.style.backgroundColor="";
+            };
+        }
+        //1.利用动态创建元素节点和追加到页面的方法实现数据绑定
+        // for(var i=0;i<ary.length;i++){
+        //     var cur=ary[i];
+        //     var oLi=document.createElement("li");
+        //     oLi.innerHTML="<span>"+(i+4)+cur.title+"</span>";
+        //     oUl.appendChild(oLi);
+        // };
+        //优势:把需要绑定的内容一个个追加到页面中,对原来的元素没有任何影响
+        //弊端:   //新增加几条数据就发生几次DOM回流耗性能
+        //2.字符串拼接方式:循环需要绑定的数据，然后把需要动态绑定的标签以字符串的方式拼接到一起
+        //拼接完成后，最后统一添加到页面中
+        // var str="";
+        // for(var i=0;i<ary.length;i++){
+        //     var cur=ary[i];
+        //     str+="<li>";
+        //     str+="<span>"+(i+4)+"</span>";
+        //     str+=cur.title;
+        //     str+="</li>";
+        // }
+        // console.log(str);
+        // //只有一次回流
+        // oUl.innerHTML+=str;//追加进去,但是这会让交互样式效果失效 oUl.innerHTML= oUl.innerHTML+str;//把之前的三个li以字符串方式获取到,拼接完成后
+        //整体还是一个字符串，最后把字符串统一添加到页面中,此时浏览器还需要把字符串渲染成为对应的标签,这时候原有的标签鼠标交互效果会消失
+        //弊端:我们把新拼接的字符串添加到#ul1中，原有三个li的鼠标移动上去的效果都消失了,原有绑定的事件都消失了
+        //字符串拼接绑定数据是我们以后工作中最常用的绑定数据的方式
+        //模板引擎数据绑定(jade kTemplate.angular.js backbone.js...)
+
+
+        //dom回流+重绘
+        //->回流(重排reflow)
+        //当页面中的结构发生改变(增加 删除元素 位置发生改变),浏览器需要重新计算一遍最新的DOM结构,重新对当前页面进行渲染
+        //重绘:某一个元素的部分样式发生改变了,浏览器只需要重新渲染当前元素即可
+        //JS优化:防止内存泄露 防止浏览器回流和重绘
+
+        //3.文档碎片
+        var frg=document.createDocumentFragment();//创建一个文档碎片这是一个对象
+        for(var i=0;i<ary.length;i++){
+            var cur=ary[i];
+            var oLi=document.createElement("li");
+            oLi.innerHTML="<span>"+(i+4)+cur.title+"</span>";
+            frg.appendChild(oLi);
+        };
+        oUl.appendChild(frg);
+        frg=null;//用完清空
+    }
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //exec->正则捕获
+    //捕获内容格式:
+    //每一次捕获的时候都是先进行默认的匹配,如果没有匹配成功的捕获的结果是null
+    //只有有匹配的内容我们才能捕获到而且捕获的内容格式是一个数组
+    //1)捕获到的内容是一个数组,数组中的第一项书当前大正则捕获的内容
+    //2）index捕获内容在字符串中开始的索引位置
+    //3)input:捕获的原始字符串
+    //2.正则捕获的特点
+    //1)懒惰性:每次执行exec只捕获第一个匹配的内容，在不进行任何处理的情况下，再执行多次捕获，捕获的还是第一个匹配内容
+    //lastIndex:是正则每一次捕获在字符串中开始查找的位置，默认的值是0
+
+    // var reg=/\d+/;
+    // //var str="zhuxia";//null
+    // var str="zhu2015xia2016";
+    // var res=reg.exec(str);
+    // console.log(res);
+    // console.log(reg.lastIndex);
+    // //我们第二次通过exec捕获的内容还是第一个"2015"
+    //     res=reg.exec(str);
+    // console.log(res);
+    // console.log(reg.lastIndex);
+    //如何解决懒惰性?在正则的末尾加一个修饰符"g"
+    //修饰符g i m
+    //global:全局匹配
+    //ignoreCase:忽略大小写
+    //mutiline:多行匹配
+    //原理:加了全局修饰符g，正则每次捕获后我们的lastIndex值变为最新的值，下次捕获从最新位置查找，这样我们就能够捕获下次的
+    //自己编写程序捕获正则获取所有的内容(一定不要忘记加g)
+    // var reg=/\d+/g;
+    // var str="zhu2015xia2016";
+    // // console.log(reg.exec(str));
+    // // console.log(reg.lastIndex);
+    // // console.log(reg.exec(str));
+    // // console.log(reg.lastIndex);
+    // // console.log(reg.exec(str));//null
+    // // console.log(reg.lastIndex);
+    // var ary=[];
+    // var res=reg.exec(str);
+    // while (res){
+    //     ary.push(res[0]);
+    //     //继续捕获
+    //     res=reg.exec(str);
+    // }
+    // console.log(ary);
+    // var reg=/\d+?/g;//出现1-多个0-9之间的数字
+    // var str="zhu2015xia2016li2018";
+    // var ary=[],res=reg.exec(str);
+    // while (res){
+    //     ary.push(res[0]);
+    //     res=reg.exec(str);
+    // }
+    // console.log(ary);
+    //?在正则有很多作用
+    //放在一个普通元字符后面:表示出现0-1次  /\d?/出现0-1次数字  数字可能出现可能不出现
+    //但是放在一个量词元字符后面是取消捕获时候的贪婪性/\d+?/g;
+    //正则捕获贪婪性:正则每一次的捕获都是按照匹配最长的那个结果捕获:例如2 2015都符合 但是我们默认捕获的是2015
+    //如何解决正则的贪婪性:在两次元字符后面添加一个?即可
+    //字符串中match方法->把所有和正则匹配的字符都获取到
+    // var reg=/\d+?/g;//出现1-多个0-9之间的数字
+    // var str="zhu2015xia2016li2018";
+    // var ary=str.match(reg);//执行一次把所有符合要求的字符串都捕获到
+    // console.log(ary);
+    // var reg=/\d+/g;//出现1-多个0-9之间的数字
+    // var str="zhu2015xia2016li2018";
+    // var ary=str.match(reg);//执行一次把所有符合要求的字符串都捕获到
+    // console.log(ary);
+    //当大正则中存在分组的时候用match存在自己处理不了的问题
+    //在分组捕获的情况下,match只能捕获到大正则的内容，对于小正则捕获的内容无法捕获
+</script>
+</body>
+</html>

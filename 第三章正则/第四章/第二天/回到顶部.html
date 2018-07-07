@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body,html{
+            height: 300%;
+        }
+        a{
+            display: none;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 100px;
+            font-size: 25px;
+            position: fixed;
+            right: 10px;
+            bottom: 10px;
+            background: dodgerblue;
+            color:#ff00ff;
+            text-decoration: none;
+        }
+        div{
+            width: 100%;
+        }
+        #div1{
+            height: 600px;
+            background: lawngreen;
+        }
+        #div2{
+            height: 500px;
+            background: #f90;
+        }
+        #div3{
+            height: 800px;
+            background: green;
+        }
+        #div4{
+            height: 600px;
+            background: blue;
+        }
+    a{
+        font-size: 25px;
+    }
+    </style>
+</head>
+<body>
+<a href="javascript:;">toTop</a>
+<!--<a href="javascript:void(0);">toTop</a>-->
+<!--<div id="div1">1</div>-->
+<!--<div id="div2">2</div>-->
+<!--<div id="div3">3</div>-->
+<!--<div id="div4">4</div>-->
+<!--<a href="#div1">模块1</a>-->
+<!--<a href="#div2">模块2</a>-->
+<!--<a href="#div3">模块3</a>-->
+<!--<a href="#div4">模块4</a>-->
+</body>
+<script src="js/utils.js"></script>
+<script>
+    var oBtn=document.getElementsByTagName('a')[0];
+    //1.总距离target 2.总时间 duration 3.频率interval 4.步长 target/duration*interval  速度*频率=步长  每步走多长
+    //每次在最新的距离上-固定步长=新距离;  给元素赋值他最新的距离;
+    window.onscroll=function () {
+        if(utils.win('scrollTop')>utils.win('clientHeight')){
+            oBtn.style.display='block';
+        }else{
+            oBtn.style.display='none';
+        }
+        //发生滚轮事件，然后再点击事件发生
+        var timer=null;
+        oBtn.onclick=function () {
+            var target=utils.win('scrollTop');
+            var duration=1000;
+            var interval=10;
+            var step=target/duration*interval;
+            clearInterval(timer);
+            timer=setInterval(function () {
+            //拿到最新的距离,最新的距离上-固定步长=新距离;  给元素赋值他最新的距离;
+                var curTop=utils.win('scrollTop');
+                curTop-=step;
+                if(curTop<=0){//如果小于等于说明已经到顶部了此时关闭定时器
+                    clearInterval(timer);
+                    return;
+                }
+                utils.win('scrollTop',curTop);
+            },interval)
+        }
+    }
+</script>
+</html>

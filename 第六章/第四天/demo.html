@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Person(name,age) {
+        this.name=name;
+        this.age=age;
+    }
+    function Student(name,age,grade) {
+        Person.apply(this,arguments);
+        this.grade=grade;
+    }
+    var s1=new Student()
+</script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>寄生组合式继承</title>
+</head>
+<body>
+<script>
+    //寄生组合式继承:
+    function A() {
+        this.x=100;
+    }
+    A.prototype.getX=function () {
+        console.log(this.x);
+    }
+    function B() {
+       A.call(this);
+    }
+    //这个有兼容问题
+    //B.prototype=Object.create(A.prototype);//相当于把A的原型给B的原型,这样只把父类的公有的方法给子类的公有的
+    //自己写一个方法
+    B.prototype=objectCreate(A.prototype);//相当于把A的原型给B的原型,这样只把父类的公有的方法给子类的公有的
+    //相当于把父类的原型给子类的原型
+    B.prototype.constructor=B;
+    var n=new B;
+    console.dir(n.x);
+    function objectCreate(o) {
+        //创建一个类
+        function Fn() {
+
+        }
+        Fn.prototype=o;//Fn的原型指向obj
+        return new Fn;//返回一个指向obj原型的实例
+    }
+</script>
+</body>
+</html>

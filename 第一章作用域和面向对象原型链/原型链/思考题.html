@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // console.log(new Array());
+    // console.log(new Object());
+    // console.log(new Number());
+    // console.log(new String());
+    //数组的原型上有一个方法叫做slice方法，我们要求大家自己回去后实现这个方法mySlice
+    Array.prototype.mySlice=function () {
+
+    }
+    //考虑的情况
+    //1.slice(n,m)
+    //1.slice(n)
+    //1.slice()
+    //n m是负数
+    //n<m
+    //n m值超过数组长度了
+    //n m不是有效数字
+    //不能使用数组内置的方法
+    // 5.plus(10).reduce(2); 5+10-2
+   //  Number.prototype.plus=function (n) {
+   //      var num=new Number(this);
+   //          return num+Number(n);
+   //
+   //  }
+   //  Number.prototype.reduce=function (n) {
+   //      var num=new Number(this);
+   //      return num-Number(n);
+   //
+   //  }
+   //  // Number.prototype.reduce=function () {
+   //  //
+   //  // }
+   // let res=(5).plus(5).reduce(2);
+   //  console.log(res);
+</script>
+</body>
+</html>
